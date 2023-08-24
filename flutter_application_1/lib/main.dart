@@ -11,7 +11,7 @@ void main() => runApp(MaterialApp(
       child: const Text('Hello'),
     ),
     floatingActionButton: FloatingActionButton(
-      child: icon
+      child: Icon(Icons.add),
     ),
    )
 
