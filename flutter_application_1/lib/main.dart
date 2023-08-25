@@ -2,17 +2,24 @@ import 'package:flutter/material.dart';
 
 void main() => runApp(MaterialApp(
    home: Scaffold(
-    backgroundColor: Color(0xFFffc0cb),
+    backgroundColor: Colors.pink[100],
     appBar: AppBar(
-      title: Text('Louliii'),
+      title: Text(
+        'First App',
+        style: TextStyle(
+          fontFamily: 'DancingScript',
+          fontSize: 30.0,
+          fontWeight: FontWeight.bold,
+        ),
+        ),
       centerTitle: true,
+      backgroundColor: Colors.pink[300],
     ),
     body: Center(
-      child: const Text('Hello'),
+      child: Image.asset('assets/images/duck.png')
+        ),
     ),
-    floatingActionButton: FloatingActionButton(
-      child: Icon(Icons.add),
-    ),
+    
    )
 
-));
+);
