@@ -5,11 +5,11 @@ void main() => runApp(MaterialApp(
     backgroundColor: Colors.pink[100],
     appBar: AppBar(
       title: Text(
-        'First App',
+        'First Application',
         style: TextStyle(
-          fontFamily: 'DancingScript',
-          fontSize: 30.0,
-          fontWeight: FontWeight.bold,
+        fontFamily: 'DancingScript',
+        fontSize: 30.0,
+        fontWeight: FontWeight.bold,
         ),
         ),
       centerTitle: true,
