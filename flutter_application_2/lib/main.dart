@@ -4,7 +4,13 @@ void main() => runApp(MaterialApp(
   home: IdCard(),
 ));
 
-class IdCard extends StatelessWidget {
+class IdCard extends StatefulWidget {
+  @override
+  State<IdCard> createState() => _IdCardState();
+}
+
+class _IdCardState extends State<IdCard> {
+  int uniLevel= 0;
   @override
   Widget build (BuildContext context) {
     return Scaffold(
@@ -15,6 +21,15 @@ class IdCard extends StatelessWidget {
         backgroundColor: Colors.teal[300],
         elevation: 10,
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          setState(() {
+            uniLevel +=1;
+          });
+        },
+        backgroundColor: Colors.teal[300],
+        child: Icon(Icons.add),
+        ),
       body: Padding(
             padding: EdgeInsets.fromLTRB(20.0, 30.0, 20.0, 0.0),
             child: Column(
@@ -59,7 +74,7 @@ class IdCard extends StatelessWidget {
               SizedBox(height: 30.0,),
 
               Text(
-                'COUNTRY OF ORIGIN',
+                'UNIVERSITY LEVEL',
                 style: TextStyle(
                   color: Colors.teal[400],
                   letterSpacing: 2.0,
@@ -70,7 +85,7 @@ class IdCard extends StatelessWidget {
               SizedBox(height: 5.0,),
 
               Text(
-                'Syria',
+                '$uniLevel',
                 style: TextStyle(
                   color: Colors.grey,
                   fontSize: 20.0,
@@ -102,6 +117,5 @@ class IdCard extends StatelessWidget {
         ),
         );
   }
-
 }
 
