@@ -29,7 +29,7 @@ class IdCard extends StatelessWidget {
               ),
 
               Divider(
-                height: 70.0,
+                height: 60.0,
                 color: Colors.teal,
               ),
 
