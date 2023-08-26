@@ -30,60 +30,91 @@ class Home extends StatelessWidget
   child: Column(
     mainAxisAlignment: MainAxisAlignment.start,
     children: <Widget>[
-      Row(
-        children: <Widget>[
-          Container(
-            color: Colors.pinkAccent[200],
-            padding: EdgeInsets.all(20.0),
-            margin: EdgeInsets.all(5.0),
-            child: Row(children: <Widget> [
-
-              Column(children: <Widget> [
-              Text(
-                  'Period day 13',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 30.0,
-                    fontFamily: 'DancingScript',
+      Container(
+        color: Colors.pinkAccent[200],
+        padding: EdgeInsets.all(20.0),
+        margin: EdgeInsets.all(5.0),
+        child: Row(
+          children: <Widget>[
+            Expanded(
+              flex: 4,
+              child: Column(
+                children: <Widget>[
+                  Text(
+                    'Last day period',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 30.0,
+                      fontFamily: 'DancingScript',
+                    ),
                   ),
-                ),
-                Text(
-                  'Period ends in 3 days',
-                  style: TextStyle(
-                  color: Colors.pink[600],
-                  fontSize: 10.0,
-                  fontWeight: FontWeight.bold,
-                  ),)
-              ],),
-              
-            
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 30.0, vertical: 10.0),
-                  child: Image.asset(
-                   'assets/images/duck.png',
-                    width: 100.0, 
-                    height: 100.0, 
-                  ),
-                ),
-
-                
-                    
-
-                    
-                    
-                  
-              
-                
-          
-            ],)
-                
+                  Text(
+                    'Period ends today!',
+                    style: TextStyle(
+                      color: Colors.pink[600],
+                      fontSize: 10.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  )
+                ],
+              ),
             ),
-        
-        ],
+            Expanded(
+              flex: 2,
+              child: Image.asset(
+                'assets/images/cat2.png',
+                width: 70.0,
+                height: 70.0,
+              ),
+            ),
+          ],
+        ),
+      ),
+    
+      Container(
+        color: Colors.pinkAccent[100],
+        padding: EdgeInsets.all(20.0),
+        margin: EdgeInsets.all(5.0),
+        child: Row(
+          children: <Widget>[
+            Expanded(
+              flex: 4,
+              child: Column(
+                children: <Widget>[
+                  Text(
+                    'First day period',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 30.0,
+                      fontFamily: 'DancingScript',
+                    ),
+                  ),
+                  Text(
+                    'Period ends in 5 days',
+                    style: TextStyle(
+                      color: Colors.pink[600],
+                      fontSize: 10.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  )
+                ],
+              ),
+            ),
+            Expanded(
+              flex: 2,
+              child: Image.asset(
+                'assets/images/cat3.png',
+                width: 70.0,
+                height: 70.0,
+              ),
+            ),
+          ],
+        ),
       ),
     ],
   ),
 ),
+
 );
 
 
