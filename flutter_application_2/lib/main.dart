@@ -20,6 +20,20 @@ class IdCard extends StatelessWidget {
             child: Column(
              crossAxisAlignment: CrossAxisAlignment.start,
              children: <Widget> [
+
+              Center(
+                child: CircleAvatar(
+                  backgroundImage: AssetImage('assets/Teal_Avatar.png'),
+                  radius: 40.0,
+                ),
+              ),
+
+              Divider(
+                height: 70.0,
+                color: Colors.teal,
+              ),
+
+
               Text(
                 'NAME',
                 style: TextStyle(
