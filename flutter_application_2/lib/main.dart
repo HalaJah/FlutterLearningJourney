@@ -23,7 +23,7 @@ class IdCard extends StatelessWidget {
 
               Center(
                 child: CircleAvatar(
-                  backgroundImage: AssetImage('assets/Teal_Avatar.png'),
+                  backgroundImage: AssetImage('assets/Teal_Avatar2.jpg'),
                   radius: 40.0,
                   backgroundColor: Colors.white,
                 ),
