@@ -6,11 +6,7 @@ class SelectLocation extends StatefulWidget{
 }
 
 class _SelectLocationState extends State<SelectLocation>{
-  @override
-  void initState(){
-    super.initState();
-    print('initState');
-  }
+ 
   int counter = 0;
 
   @override
