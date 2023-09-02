@@ -8,14 +8,14 @@ class Home extends StatefulWidget{
 class _HomeState extends State<Home>{
 
   Map data = {};
-
   @override
   Widget build(BuildContext context){
-    data = ModalRoute.of(context)?.settings.arguments as Map<dynamic, dynamic>? ?? {};;
+    data = data.isNotEmpty ? data : ModalRoute.of(context)?.settings.arguments as Map<dynamic, dynamic>? ?? {};;
 
     //set background
-    String? bgImage = data['isDayTime'] ? 'DayTime.jpeg' : 'Night.webp';
-    Color? bgColor = data['isDayTime'] ? Colors.purple[400] : Colors.purple [200];
+    String? bgImage = data['isDayTime'] ? 'DayTime.jpeg' : 'Night.png';
+    Color? bgColor = data ['isDayTime'] ? Colors.purple[400] : Colors.purple [200];
+    
 
     return Scaffold(
       backgroundColor: bgColor,
@@ -32,16 +32,24 @@ class _HomeState extends State<Home>{
             child: Column(
               children: <Widget> [
                 ElevatedButton.icon(
-                  onPressed:() {
-                    Navigator.pushNamed(context, '/select_location');
+                  onPressed:() async {
+                    dynamic result = await Navigator.pushNamed(context, '/select_location');
+                    setState(() {
+                      data = {
+                        'time' : result['time'],
+                        'location' : result['location'],
+                        'isDayTime' : result['isDayTime'],
+                        'flag' : result['flag'],
+
+                      };
+                    });
                   }, 
                   icon: Icon(
                     Icons.edit_location,
                     ),
                   label: Text('Edit Location'),
                   style : ElevatedButton.styleFrom(
-                    backgroundColor: bgColor,
-                    
+                    backgroundColor: bgColor, 
                   )
                   ),
                   SizedBox(height: 20.0),
