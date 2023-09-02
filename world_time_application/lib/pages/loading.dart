@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:world_time_application/services/world_time.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
@@ -21,6 +20,7 @@ class _LoadingState extends State<Loading> {
       'location' : instance.location,
       'time' : instance.time,
       'flag' : instance.flag,
+      'isDayTime' : instance.isDayTime,
     });
     
   }
