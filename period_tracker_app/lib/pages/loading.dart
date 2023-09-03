@@ -16,15 +16,7 @@ Widget build(BuildContext context){
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget> [
-                  Container(
-                    width: 60.0,
-                    height: 60.0,
-                    color: Colors.white,
-                    child: CustomPaint(
-                      foregroundPainter: Heart(),
-                    )
-
-                  ),
+                  AnimatedHeart(),
                   SizedBox(height: 20.0),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(0,0, 50.0, 0),
@@ -39,16 +31,16 @@ Widget build(BuildContext context){
                   'My Period Tracker',
                    style: TextStyle(
                     fontSize: 30.0,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Eczar',
+                    //fontWeight: FontWeight.bold,
+                    fontFamily: 'Roboto',
                     color: Colors.grey[900],
-                    shadows: <Shadow>[
+                    /* shadows: <Shadow>[
                     Shadow(
                     offset: Offset(10.0, 10.0),
                     blurRadius: 3.0,
-                    color: Color.fromARGB(70, 255, 105, 180),
-                    ),]
-                  ),
+                    color: Color.fromARGB(100, 255, 105, 180),
+                    ),] */
+                  )
                   ),
               ],
           ),
@@ -56,6 +48,29 @@ Widget build(BuildContext context){
   );
 }
 
+}
+
+class AnimatedHeart extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return TweenAnimationBuilder<double>(
+        tween: Tween<double>(begin: 0.0, end: 1.0),
+        curve: Curves.bounceInOut,
+        duration: const Duration(seconds: 15),
+        builder: (BuildContext context, double opacity, Widget? child) {
+          return Opacity(
+              opacity: opacity,
+              child: Container(
+                    width: 60.0,
+                    height: 60.0,
+                    color: Colors.white,
+                    child: CustomPaint(
+                    foregroundPainter: Heart(),
+                    ) 
+          )
+          );
+    });
+  }
 }
 
 class Heart extends CustomPainter{
@@ -66,7 +81,7 @@ class Heart extends CustomPainter{
     paintFrame.color = Color.fromARGB(255, 33, 33, 33);
     paintFrame.style = PaintingStyle.stroke;
     paintFrame.strokeCap = StrokeCap.round;
-    paintFrame.strokeWidth = 3;
+    paintFrame.strokeWidth = 2;
 
     Paint paintFill = Paint();
     
