@@ -82,6 +82,13 @@ flutter:
     - family: Roboto
       fonts:
         - asset: fonts/RobotoCondensed-Bold.ttf
+    - family: Tinos
+      fonts:
+        - asset: fonts/Tinos-Regular.ttf
+    - family: Merriweather
+      fonts:
+        - asset: fonts/Merriweather-Bold.ttf
+        
         
   #
   # For details regarding fonts from package dependencies,
