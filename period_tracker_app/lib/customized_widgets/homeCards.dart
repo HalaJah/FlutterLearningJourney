@@ -17,9 +17,11 @@ class _HomeCardsState extends State<HomeCards> {
   IconData icon = Icons.arrow_back;
   double width = 0.0;
 
+  
+
 
   void getColor(String title){
-  if (title == 'Calendar' || title == 'Settings') {
+  if (title == 'Calendar') {
       color1 = const Color.fromARGB(255, 232, 191, 126);
       color2 = const Color.fromARGB(255, 245, 178, 90);
       color3 = const Color.fromARGB(255, 92, 65, 46);
@@ -32,18 +34,24 @@ class _HomeCardsState extends State<HomeCards> {
       color2 = const Color.fromARGB(255, 114, 157, 199);
       color3 = const Color.fromARGB(255, 28, 70, 104);
     }
+    else if(title == 'Settings' )
+    {
+      color1 = const Color.fromARGB(255, 186, 185, 182);
+      color2 = const Color.fromARGB(255, 109, 108, 106);
+      color3 = const Color.fromARGB(255, 69, 57, 49);
+    }
   }
 
-  double getWidth(String title){
+  double getWidth(String title, double screenWidth){
     if (title == 'Calendar') {
-      return  315;
+      return  (screenWidth*0.92) - 60;
     } else if (title == 'Journal') {
-      return 335;
+      return (screenWidth*0.92) - 40;
     } else if (title == 'Profile') {
-      return 355;
+      return (screenWidth*0.92) - 20;
     }
     else if(title == 'Settings'){
-      return 375;
+      return screenWidth*0.92;
     }
     return 0;
   }
@@ -67,15 +75,18 @@ class _HomeCardsState extends State<HomeCards> {
   void initState() {
   super.initState();
   getColor(widget.title);
-  width = getWidth(widget.title);
   icon = getIcon(widget.title);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(10.0, 0, 10.0, 0),
-      child: Material(
+  double screenWidth = MediaQuery.of(context).size.width;
+  double screenHeight = MediaQuery.of(context).size.height;
+  if(width == 0.0)
+  {
+    width = getWidth(widget.title, screenWidth);
+  } 
+    return Material(
         color: Colors.transparent,
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(35),
@@ -89,14 +100,14 @@ class _HomeCardsState extends State<HomeCards> {
           child: InkWell(
             onDoubleTap: () {
               setState(() {
-                width == getWidth(widget.title) + 14 ? width = getWidth(widget.title) : width = width + 7;
+                width >= getWidth(widget.title, screenWidth) + 10 ? width = getWidth(widget.title, screenWidth) : width = width + 10;
               });
             },
             splashColor: Colors.grey,
             child: Container(
               padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
               alignment: Alignment.center,
-              height: 85,
+              height: screenHeight * 0.1,
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(35),
@@ -126,20 +137,26 @@ class _HomeCardsState extends State<HomeCards> {
                     color: color3,
                     size: 30,
                   ),
-                  SizedBox(width: width - 230),
-                  Text(
-                    widget.title,
-                    style: TextStyle(
-                      fontFamily: 'Merriweather',
-                      fontSize: 21,
-                      fontWeight: FontWeight.bold,
+                  SizedBox(width: width * 0.2),
+                  Container(
+                    width: width*0.35,
+                    child: Text(
+                      widget.title,
+                      style: TextStyle(
+                        fontFamily: 'Merriweather',
+                        fontSize: 21,
+                        fontWeight: FontWeight.bold,
+                        color: color3,
+                      )
+                      ),
+                  ),
+                  //SizedBox(width: width*0.000000001), //Change
+                  Container(
+                    width: width* 0.08,
+                    child: Icon(
+                      Icons.arrow_forward_ios_outlined,
                       color: color3,
-                    )
                     ),
-                  const SizedBox(width: 10),
-                  Icon(
-                    Icons.arrow_forward_ios_outlined,
-                    color: color3,
                   ),
 
                   
@@ -148,7 +165,6 @@ class _HomeCardsState extends State<HomeCards> {
             ),
           ),
         ),
-      ),
     );
   }
 }
