@@ -136,11 +136,60 @@ class _ProfileState extends State {
               ),
 
               Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Container(
+              padding: const EdgeInsets.all(10.0),
+              child: Stack(
+                children: [
+                  // Background Container
+                  Container(
+                    width: screenWidth * 0.8,
+                    height: screenWidth * 0.7,
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black,
+                          offset: Offset(0, 1),
+                          blurRadius: 5,
+                          spreadRadius: 0,
+                        ),
+                      ],
+                    ),
+                  ),
+                  // Padding for the Text
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Text(
+                      'How Many Days is Your Cycle?',
+                      style: TextStyle(
+                        fontFamily: 'Merriweather',
+                        fontSize: 15,
+                        color: Color.fromARGB(255, 59, 53, 43),
+                      ),
+                    ),
+                  ),
+                  // Circle Container
+                  Container(
+                    width: screenWidth * 0.45,
+                    height: screenWidth * 0.45,
+                    decoration: BoxDecoration(
+                      color: Colors.pink,
+                      shape: BoxShape.circle,
+                    ),
+                  ),
+                  // Positioned Image
+                  Positioned(
+                    top: 2,
+                    left: -screenWidth * 0.2,
+                    child: Image.asset(
+                      'assets/TextFieldCat.png',
+                      width: screenWidth * 0.4,
+                      height: screenWidth * 0.4,
+                    ),
+                  )
+                ],
+              ),
+            )
 
-                ),
-              )
             ],
           )
         ),
