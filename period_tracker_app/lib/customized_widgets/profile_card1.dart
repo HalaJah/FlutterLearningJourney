@@ -15,10 +15,10 @@ class ProfileCardOne extends StatefulWidget {
 class _ProfileCardOneState extends State<ProfileCardOne> {
   // Variable to hold the size of the add icon
   double addIconSize = 20.0;
-  List<DateTime> dates = [];
+  List<DateTime?> days = [];
   Future<List<DateTime?>?> results = Future.value([]);
   List<String> startAndEndDates = [];
-
+  
   
 
   @override
@@ -26,7 +26,7 @@ class _ProfileCardOneState extends State<ProfileCardOne> {
     // Fetch screen width for layout calculations
     double screenWidth = MediaQuery.of(context).size.width;
 
-    
+  
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Stack(
@@ -55,16 +55,8 @@ class _ProfileCardOneState extends State<ProfileCardOne> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               //Storing start and end date and displaying to the screen
-              FutureBuilder<List<DateTime?>?>(
-              future: results,
-              builder: (context, snapshot) {
-                if(snapshot.data == null)
-                {
-                  return const Text('');
-                }
-                else{
-                  startAndEndDates = snapshot.data!.map((e) => e.toString()).toList();
-                  return Padding(
+              
+              Padding(
                     padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -117,9 +109,8 @@ class _ProfileCardOneState extends State<ProfileCardOne> {
                         : const Text('')
                         ])
                       ]),
-                  );}
-                },
-              ),
+                  ),
+                   
               // Spacing widget
               SizedBox(height: screenWidth * 0.15),
               // Horizontal line
@@ -146,20 +137,24 @@ class _ProfileCardOneState extends State<ProfileCardOne> {
                   children: [
                     // Icon button with functionality
                     InkWell(
-                      onTap: () {
-                        setState(() {
-                          addIconSize >= 23
-                              ? addIconSize = 20
-                              : addIconSize += 3.0;
-                              results = showCalendarDatePicker2Dialog(
-                              context: context,
-                              config: SelectDate.dialog,
-                              dialogSize: const Size(325, 400),
-                              value: dates,
-                              borderRadius: BorderRadius.circular(15),
-                              );
-                        });
-                      },
+                     
+  onTap: () async {
+    
+     List<DateTime?>? dates = await showCalendarDatePicker2Dialog(
+      context: context,
+      config: SelectDate.dialog,
+      dialogSize: const Size(325, 400),
+      value: days,
+      borderRadius: BorderRadius.circular(15),);
+      if (dates != null) {
+      setState(() {
+        startAndEndDates = dates.map((e) => e.toString()).toList();
+      });
+    }
+    
+  },
+  
+
                       splashColor: Colors.pink,
                       child: Icon(
                         Icons.add,
