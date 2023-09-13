@@ -87,6 +87,7 @@ class _CalendarState extends State<Calendar> {
                   ],
                 ),
                 child: TableCalendar(
+                  // Calendar Header Style
                   headerStyle: const HeaderStyle(
                     titleCentered: true,
                     formatButtonVisible: false,

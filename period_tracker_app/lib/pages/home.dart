@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:period_tracker_app/customized_widgets/homeCards.dart';
-import 'package:period_tracker_app/customized_widgets/homeHorizontalCards.dart';
+import 'package:period_tracker_app/customized_widgets/home_cards.dart';
+import 'package:period_tracker_app/customized_widgets/home_horizontal_cards.dart';
 
 class Home extends StatefulWidget {
   @override

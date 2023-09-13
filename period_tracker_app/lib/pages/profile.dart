@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:period_tracker_app/customized_widgets/profileCard1.dart';
-import 'package:period_tracker_app/customized_widgets/profileCard2.dart';
+import 'package:period_tracker_app/customized_widgets/profile_card1.dart';
+import 'package:period_tracker_app/customized_widgets/profile_card2.dart';
 
 
 class Profile extends StatefulWidget {
@@ -65,12 +65,12 @@ class _ProfileState extends State<Profile> {
               // Shadow-like line
               Container(
                 height: 1.5,
-                color: Color.fromARGB(255, 237, 227, 216),
+                color: const Color.fromARGB(255, 237, 227, 216),
               ),
               // Custom profile card 1
-              ProfileCardOne(),
+              const ProfileCardOne(),
               // Custom profile card 2
-              ProfileCardTwo(),
+              const ProfileCardTwo(),
             ],
           ),
         ),

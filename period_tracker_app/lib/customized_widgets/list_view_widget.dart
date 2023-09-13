@@ -5,7 +5,7 @@ class ListViewWidget{
   String title = '';
   String iconName = 'add';
 
-  ListViewWidget(@required this.title, @required this.iconName);
+  ListViewWidget( this.title, this.iconName);
   
 }
 

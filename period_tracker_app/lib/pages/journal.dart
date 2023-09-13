@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:period_tracker_app/customized_widgets/listViewWidget.dart';
+import 'package:period_tracker_app/customized_widgets/list_view_widget.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Journal extends StatefulWidget {
