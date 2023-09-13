@@ -60,18 +60,20 @@ class _ProfileState extends State<Profile> {
             ),
           ),
           // Body of the Scaffold
-          body: Column(
-            children: [
-              // Shadow-like line
-              Container(
-                height: 1.5,
-                color: const Color.fromARGB(255, 237, 227, 216),
-              ),
-              // Custom profile card 1
-              const ProfileCardOne(),
-              // Custom profile card 2
-              const ProfileCardTwo(),
-            ],
+          body: SingleChildScrollView(
+            child: Column(
+              children: [
+                // Shadow-like line
+                Container(
+                  height: 1.5,
+                  color: const Color.fromARGB(255, 237, 227, 216),
+                ),
+                // Custom profile card 1
+                const ProfileCardOne(),
+                // Custom profile card 2
+                const ProfileCardTwo(),
+              ],
+            ),
           ),
         ),
         // Positioned widget for image at the bottom right
