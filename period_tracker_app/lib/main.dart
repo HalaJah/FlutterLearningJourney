@@ -6,7 +6,7 @@ import 'package:period_tracker_app/pages/profile.dart';
 import 'package:period_tracker_app/pages/calendar.dart';
 
 void main() => runApp(MaterialApp(
-  initialRoute: '/profile',
+  initialRoute: '/calendar',
   routes: {
     '/' :(context) => Loading(),
     '/home':(context) => Home(),

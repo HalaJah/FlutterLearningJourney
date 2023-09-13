@@ -39,8 +39,8 @@ class _ProfileCardTwo extends State<ProfileCardTwo> {
             ),
           ),
           // Text Widget
-          Padding(
-            padding: const EdgeInsets.all(10),
+          const Padding(
+            padding: EdgeInsets.all(10),
             child: Text(
               'How Many Days is Your Cycle?',
               style: TextStyle(
@@ -72,24 +72,28 @@ class _ProfileCardTwo extends State<ProfileCardTwo> {
           ),
           // TextField and displayed text
           Positioned(
-            bottom: screenWidth * 0.3,
-            left: screenWidth * 0.33,
+            bottom: screenWidth * 0.22,
+            left: screenWidth * 0.35,
             child: Stack(
+              alignment: Alignment.center,
               children: [
-                Text(
-                  _displayedText,
-                  style: const TextStyle(
-                    fontFamily: 'Merriweather',
-                    fontSize: 13,
-                    color: Color.fromARGB(255, 59, 53, 43),
-                  ),
-                ),
                 SizedBox(
-                  width: 30,
-                  height: 30,
+                  width: screenWidth*0.2,
+                  height: screenWidth*0.2,
                   child: TextField(
+                    cursorColor: const Color.fromRGBO(222, 74, 123, 1),
+                    autofocus: true,
+                    showCursor: true,
+                    decoration: const InputDecoration(
+                      border: InputBorder.none,
+                     ),
+                    style: const TextStyle(
+                      fontFamily: 'Merriweather',
+                      fontSize: 30,
+                      color: Color.fromARGB(255, 59, 53, 43),
+                    ),
                     controller: _controller,
-                    onChanged: (value) {
+                    onSubmitted: (value) {
                       setState(() {
                         _displayedText = value;
                       });
