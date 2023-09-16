@@ -69,9 +69,9 @@ class _ProfileState extends State<Profile> {
                   color: const Color.fromARGB(255, 237, 227, 216),
                 ),
                 // Custom profile card 1
-                const ProfileCardOne(),
+                ProfileCardOne(),
                 // Custom profile card 2
-                const ProfileCardTwo(),
+                ProfileCardTwo(),
               ],
             ),
           ),

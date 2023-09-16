@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 // ProfileCardTwo Stateful Widget
 class ProfileCardTwo extends StatefulWidget {
-  const ProfileCardTwo();
+  static int cycleDays = 0;
+  ProfileCardTwo();
 
   @override
   _ProfileCardTwo createState() => _ProfileCardTwo();
@@ -10,7 +11,7 @@ class ProfileCardTwo extends StatefulWidget {
 
 class _ProfileCardTwo extends State<ProfileCardTwo> {
   TextEditingController _controller = TextEditingController();
-  String _displayedText = "";
+  
 
   @override
   Widget build(BuildContext context) {
@@ -94,7 +95,7 @@ class _ProfileCardTwo extends State<ProfileCardTwo> {
                       controller: _controller,
                       onSubmitted: (value) {
                         setState(() {
-                          _displayedText = value;
+                          ProfileCardTwo.cycleDays = int.parse(value);
                         });
                       },
                     ),

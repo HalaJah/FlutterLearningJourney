@@ -6,7 +6,9 @@ import 'package:intl/intl.dart';
 
 // ProfileCardOne Stateful Widget
 class ProfileCardOne extends StatefulWidget {
-  const ProfileCardOne();
+  static List<String> startAndEndDates = [];
+  static int get size => startAndEndDates.length;
+  ProfileCardOne();
 
   @override
   _ProfileCardOneState createState() => _ProfileCardOneState();
@@ -16,8 +18,7 @@ class _ProfileCardOneState extends State<ProfileCardOne> {
   // Variable to hold the size of the add icon
   double addIconSize = 20.0;
   List<DateTime?> days = [];
-  Future<List<DateTime?>?> results = Future.value([]);
-  List<String> startAndEndDates = [];
+  
   
   
 
@@ -31,8 +32,6 @@ class _ProfileCardOneState extends State<ProfileCardOne> {
       padding: const EdgeInsets.all(10.0),
       child: Stack(
         children: [
-          
-          
           Container(
           // Container dimensions
           width: screenWidth * 0.8,
@@ -54,8 +53,6 @@ class _ProfileCardOneState extends State<ProfileCardOne> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              //Storing start and end date and displaying to the screen
-              
               Padding(
                     padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
                     child: Row(
@@ -73,9 +70,9 @@ class _ProfileCardOneState extends State<ProfileCardOne> {
                         ),
                         ),
                         //if the list is not empty, display the start date
-                        startAndEndDates.isNotEmpty
+                        ProfileCardOne.startAndEndDates.isNotEmpty
                         ? Text(
-                        DateFormat('yyyy-MM-dd').format(DateTime.parse(startAndEndDates[0])),
+                        DateFormat('yyyy-MM-dd').format(DateTime.parse(ProfileCardOne.startAndEndDates[0])),
                         style: const TextStyle(
                           fontFamily: 'Merriweather',
                             fontSize: 8,
@@ -97,9 +94,9 @@ class _ProfileCardOneState extends State<ProfileCardOne> {
                         ),
                         ),
                         //if the list has two elements, display end date
-                        startAndEndDates.length >= 2
+                        ProfileCardOne.startAndEndDates.length >= 2
                         ? Text(
-                        DateFormat('yyyy-MM-dd').format(DateTime.parse(startAndEndDates[1])),
+                        DateFormat('yyyy-MM-dd').format(DateTime.parse(ProfileCardOne.startAndEndDates[1])),
                         style: const TextStyle(
                           fontFamily: 'Merriweather',
                             fontSize: 8,
@@ -137,22 +134,22 @@ class _ProfileCardOneState extends State<ProfileCardOne> {
                   children: [
                     // Icon button with functionality
                     InkWell(
-                     
-  onTap: () async {
-    
-     List<DateTime?>? dates = await showCalendarDatePicker2Dialog(
-      context: context,
-      config: SelectDate.dialog,
-      dialogSize: const Size(325, 400),
-      value: days,
-      borderRadius: BorderRadius.circular(15),);
-      if (dates != null) {
-      setState(() {
-        startAndEndDates = dates.map((e) => e.toString()).toList();
-      });
-    }
-    
-  },
+                      onTap: () async {
+                        
+                        List<DateTime?>? dates = await showCalendarDatePicker2Dialog(
+                          context: context,
+                          config: SelectDate.dialog,
+                          dialogSize: const Size(325, 400),
+                          value: days,
+                          borderRadius: BorderRadius.circular(15),);
+                          //Storing start and end date
+                          if (dates != null) {
+                          setState(() {
+                            ProfileCardOne.startAndEndDates = dates.map((e) => e.toString()).toList();
+                          });
+                        }
+                        
+                      },
   
 
                       splashColor: Colors.pink,

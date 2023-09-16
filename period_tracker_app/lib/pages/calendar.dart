@@ -1,16 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:intl/intl.dart';
+import 'package:period_tracker_app/customized_widgets/profile_card1.dart';
+import 'package:period_tracker_app/customized_widgets/profile_card2.dart';
 
 class Calendar extends StatefulWidget {
+  
   @override
   _CalendarState createState() => _CalendarState();
 }
 
 class _CalendarState extends State<Calendar> {
+  int startDate = 0;
+  int endDate = 0;
+  DateTime startRange = ProfileCardOne.size == 2 ? DateTime.parse(ProfileCardOne.startAndEndDates[0]) : DateTime.now();
+  DateTime endRange = ProfileCardOne.size == 2 ? DateTime.parse(ProfileCardOne.startAndEndDates[1]) : DateTime.now();
+  int range = 0;
+  int cycleDays = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    startDate = ProfileCardOne.size == 2 ? int.parse((ProfileCardOne.startAndEndDates[0]).substring(8, 10)) : 0;
+    endDate = ProfileCardOne.size == 2 ? int.parse((ProfileCardOne.startAndEndDates[1]).substring(8, 10)) : 0;
+    range = (endDate - startDate) + 1;
+    cycleDays = ProfileCardTwo.cycleDays;
+  }
+
+
   @override
   Widget build(BuildContext context) {
     // Get screen dimensions
+    
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
 
@@ -87,6 +108,22 @@ class _CalendarState extends State<Calendar> {
                   ],
                 ),
                 child: TableCalendar(
+                  /* onPageChanged: (focusedDay) {
+                      DateTime lastDayOfMonth = DateTime(focusedDay.year, focusedDay.month + 1, 0);
+                      startDate = startDate + (int.parse(lastDayOfMonth.toString().substring(8, 10)) - ProfileCardTwo.cycleDays);
+                      startRange  = DateTime(focusedDay.year, focusedDay.month, startDate);
+                      endRange  = DateTime(focusedDay.year, focusedDay.month, startDate + range);
+
+                  }, */
+                  pageJumpingEnabled:  true,
+                  shouldFillViewport: true,
+
+                   // Calendar settings
+                  focusedDay: DateTime.now(),
+                  firstDay: DateTime(DateTime.now().year - 10),
+                  lastDay: DateTime(DateTime.now().year + 10),
+                  
+
                   // Calendar Header Style
                   headerStyle: const HeaderStyle(
                     titleCentered: true,
@@ -117,14 +154,24 @@ class _CalendarState extends State<Calendar> {
                     ),
                   ),
                   
-                  // Calendar settings
-                  focusedDay: DateTime.now(),
-                  firstDay: DateTime.utc(2023, 9, 1),
-                  lastDay: DateTime.utc(2023, 9, 30),
-                  
                   // Calendar builders
                   calendarBuilders: CalendarBuilders(
                     
+                  markerBuilder: (context, date, _) {
+                  if (date.isAfter(startRange) && date.isBefore(endRange)) {
+                    return Container(
+                      margin: const EdgeInsets.all(4.0),
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: const Color.fromARGB(255, 225, 155, 179),
+                        borderRadius: BorderRadius.circular(4.0),
+                      ),
+                    );
+                  } else {
+                    return null;
+                  }
+                },
+
                     // Today cell builder
                     todayBuilder: (context, date, focusedDay) => Container(
                       margin: const EdgeInsets.all(4.0),
@@ -160,6 +207,8 @@ class _CalendarState extends State<Calendar> {
                         ),
                       ),
                     ),
+
+                
                     
                     // Day of Week builder
                     dowBuilder: (context, day) => Container(
