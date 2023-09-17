@@ -11,6 +11,11 @@ class ProfileCardTwo extends StatefulWidget {
 
 class _ProfileCardTwo extends State<ProfileCardTwo> {
   TextEditingController _controller = TextEditingController();
+ /*  void updateCycleDays(){
+    Navigator.pushNamed(context, '/calendar', arguments: {
+      'cycleDays': ProfileCardTwo.cycleDays
+    });
+  } */
   
 
   @override
@@ -82,7 +87,6 @@ class _ProfileCardTwo extends State<ProfileCardTwo> {
                     height: screenWidth*0.2,
                     child: TextField(
                       cursorColor: const Color.fromRGBO(222, 74, 123, 1),
-                      autofocus: true,
                       showCursor: true,
                       decoration: const InputDecoration(
                         border: InputBorder.none,
@@ -96,6 +100,8 @@ class _ProfileCardTwo extends State<ProfileCardTwo> {
                       onSubmitted: (value) {
                         setState(() {
                           ProfileCardTwo.cycleDays = int.parse(value);
+                          //updateCycleDays();
+
                         });
                       },
                     ),

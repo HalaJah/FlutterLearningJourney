@@ -6,32 +6,37 @@ import 'package:period_tracker_app/customized_widgets/profile_card2.dart';
 
 class Calendar extends StatefulWidget {
   
+  
   @override
   _CalendarState createState() => _CalendarState();
 }
 
 class _CalendarState extends State<Calendar> {
+  DateTime _focusedDay = DateTime.now();
   int startDate = 0;
+  int selectedStartDate = ProfileCardOne.size == 2 ? int.parse(ProfileCardOne.startAndEndDates[0].substring(8,10)) : 1;
+  int selectedEndDate = ProfileCardOne.size == 2 ? int.parse(ProfileCardOne.startAndEndDates[0].substring(8,10)) : 1;
   int endDate = 0;
-  DateTime startRange = ProfileCardOne.size == 2 ? DateTime.parse(ProfileCardOne.startAndEndDates[0]) : DateTime.now();
+  DateTime startRange = ProfileCardOne.size == 2 ? DateTime.parse(ProfileCardOne.startAndEndDates[0]).subtract(const Duration(days: 1)) : DateTime.now();
   DateTime endRange = ProfileCardOne.size == 2 ? DateTime.parse(ProfileCardOne.startAndEndDates[1]) : DateTime.now();
   int range = 0;
   int cycleDays = 0;
+  Map data = {};
 
   @override
   void initState() {
     super.initState();
-    startDate = ProfileCardOne.size == 2 ? int.parse((ProfileCardOne.startAndEndDates[0]).substring(8, 10)) : 0;
-    endDate = ProfileCardOne.size == 2 ? int.parse((ProfileCardOne.startAndEndDates[1]).substring(8, 10)) : 0;
-    range = (endDate - startDate) + 1;
+    startDate = selectedStartDate;
+    range = (endRange.day - startRange.day) + 1;
     cycleDays = ProfileCardTwo.cycleDays;
   }
 
 
   @override
   Widget build(BuildContext context) {
+    //data = data.isNotEmpty ? data : ModalRoute.of(context)?.settings.arguments as Map<dynamic, dynamic>? ?? {};
+
     // Get screen dimensions
-    
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
 
@@ -108,18 +113,25 @@ class _CalendarState extends State<Calendar> {
                   ],
                 ),
                 child: TableCalendar(
-                  /* onPageChanged: (focusedDay) {
+                  onPageChanged: (focusedDay) {
+                    
                       DateTime lastDayOfMonth = DateTime(focusedDay.year, focusedDay.month + 1, 0);
-                      startDate = startDate + (int.parse(lastDayOfMonth.toString().substring(8, 10)) - ProfileCardTwo.cycleDays);
-                      startRange  = DateTime(focusedDay.year, focusedDay.month, startDate);
-                      endRange  = DateTime(focusedDay.year, focusedDay.month, startDate + range);
+                      startDate = selectedStartDate + (lastDayOfMonth.day - ProfileCardTwo.cycleDays); 
+                      endDate = startDate + range;
+                      
+                      setState(() {
+                      startRange  = DateTime.utc(focusedDay.year, focusedDay.month, startDate + 1);
+                      endRange  = DateTime.utc(focusedDay.year, focusedDay.month, endDate + 1);
+                      _focusedDay = focusedDay;
+                      });
+                     
 
-                  }, */
+                  },
                   pageJumpingEnabled:  true,
                   shouldFillViewport: true,
 
                    // Calendar settings
-                  focusedDay: DateTime.now(),
+                  focusedDay: _focusedDay,
                   firstDay: DateTime(DateTime.now().year - 10),
                   lastDay: DateTime(DateTime.now().year + 10),
                   
@@ -158,13 +170,20 @@ class _CalendarState extends State<Calendar> {
                   calendarBuilders: CalendarBuilders(
                     
                   markerBuilder: (context, date, _) {
-                  if (date.isAfter(startRange) && date.isBefore(endRange)) {
+                  if (date.isAfter(startRange) && date.isBefore(endRange) ) {
                     return Container(
                       margin: const EdgeInsets.all(4.0),
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
                         color: const Color.fromARGB(255, 225, 155, 179),
                         borderRadius: BorderRadius.circular(4.0),
+                      ),
+                      child: Text(
+                        date.day.toString(),
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 14,
+                        ),
                       ),
                     );
                   } else {

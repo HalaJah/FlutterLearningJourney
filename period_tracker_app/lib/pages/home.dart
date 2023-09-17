@@ -10,10 +10,10 @@ class Home extends StatefulWidget {
 class _HomeState extends State {
   // List of cards to display on the home screen
   List<HomeCards> homeCardsList = [
-    const HomeCards(title: 'Calendar'),
-    const HomeCards(title: 'Journal'),
-    const HomeCards(title: 'Profile'),
-    const HomeCards(title: 'Settings'),
+    const HomeCards(title: 'Calendar', route: '/calendar'),
+    const HomeCards(title: 'Journal', route: '/journal'),
+    const HomeCards(title: 'Profile', route: '/profile'),
+    const HomeCards(title: 'Settings', route: '/settings'),
   ];
 
   @override

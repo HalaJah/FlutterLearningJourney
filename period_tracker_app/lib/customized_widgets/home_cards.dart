@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 class HomeCards extends StatefulWidget {
   final String title;
+  final String route;
 
-  const HomeCards({required this.title});
+  const HomeCards({required this.title, required this.route});
 
   @override
   _HomeCardsState createState() => _HomeCardsState();
@@ -16,6 +17,11 @@ class _HomeCardsState extends State<HomeCards> {
   Color color3 = Colors.white;
   IconData icon = Icons.arrow_back;
   double width = 0.0;
+
+  void navigate(route)
+  {
+    Navigator.pushNamed(context, '$route');
+  }
 
   // Set colors based on card title
   void getColor(String title) {
@@ -103,12 +109,14 @@ class _HomeCardsState extends State<HomeCards> {
         width: width,
         child: InkWell(
           // Double-tap to resize the card
-          onDoubleTap: () {
+          onDoubleTap: () async {
             setState(() {
-              width >= getWidth(widget.title, screenWidth) + 10 
+               width >= getWidth(widget.title, screenWidth) + 10 
                 ? width = getWidth(widget.title, screenWidth)
                 : width = width + 10;
             });
+            await Future.delayed(const Duration(seconds: 1));
+            navigate(widget.route);
           },
           splashColor: Colors.grey,
           child: Container(

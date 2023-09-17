@@ -19,7 +19,12 @@ class _ProfileCardOneState extends State<ProfileCardOne> {
   double addIconSize = 20.0;
   List<DateTime?> days = [];
   
-  
+  /* void updateStartandEndDates(){
+    Navigator.pushNamed(context, '/calendar', arguments: {
+      'startDate': ProfileCardOne.size == 2 ? ProfileCardOne.startAndEndDates[0] : 0,
+      'endDate' : ProfileCardOne.size == 2 ? ProfileCardOne.startAndEndDates[1] : 0
+    });
+  } */
   
 
   @override
@@ -146,6 +151,7 @@ class _ProfileCardOneState extends State<ProfileCardOne> {
                           if (dates != null) {
                           setState(() {
                             ProfileCardOne.startAndEndDates = dates.map((e) => e.toString()).toList();
+                            //updateStartandEndDates();
                           });
                         }
                         

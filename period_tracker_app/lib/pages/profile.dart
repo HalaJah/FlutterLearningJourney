@@ -4,11 +4,13 @@ import 'package:period_tracker_app/customized_widgets/profile_card2.dart';
 
 
 class Profile extends StatefulWidget {
+  
   @override
   _ProfileState createState() => _ProfileState();
 }
 
 class _ProfileState extends State<Profile> {
+  
   @override
   Widget build(BuildContext context) {
     // Fetch screen dimensions for layout calculations
