@@ -13,22 +13,38 @@ class Calendar extends StatefulWidget {
 
 class _CalendarState extends State<Calendar> {
   DateTime _focusedDay = DateTime.now();
-  int startDate = 0;
+  
   int selectedStartDate = ProfileCardOne.size == 2 ? int.parse(ProfileCardOne.startAndEndDates[0].substring(8,10)) : 1;
   int selectedEndDate = ProfileCardOne.size == 2 ? int.parse(ProfileCardOne.startAndEndDates[0].substring(8,10)) : 1;
-  int endDate = 0;
-  DateTime startRange = ProfileCardOne.size == 2 ? DateTime.parse(ProfileCardOne.startAndEndDates[0]).subtract(const Duration(days: 1)) : DateTime.now();
+ 
+  DateTime originalStartRange = ProfileCardOne.size == 2 ? DateTime.parse(ProfileCardOne.startAndEndDates[0]).subtract(const Duration(days: 1)) : DateTime.now();
+  DateTime startRange = DateTime.now();
   DateTime endRange = ProfileCardOne.size == 2 ? DateTime.parse(ProfileCardOne.startAndEndDates[1]) : DateTime.now();
+
+  int startDate = 0;
+  int endDate = 0;
+
   int range = 0;
   int cycleDays = 0;
-  Map data = {};
+
+  List<DateTime> savedRange =[];
+
+  Map<int, List<DateTime>> savedRanges = {};
 
   @override
   void initState() {
     super.initState();
     startDate = selectedStartDate;
-    range = (endRange.day - startRange.day) + 1;
+    range = endRange.day - originalStartRange.day;
     cycleDays = ProfileCardTwo.cycleDays;
+    startRange = originalStartRange;
+
+    savedRange.add(startRange);
+    savedRange.add(endRange);
+
+    savedRanges = {
+      startRange.month : savedRange
+    };
   }
 
 
@@ -116,12 +132,40 @@ class _CalendarState extends State<Calendar> {
                   onPageChanged: (focusedDay) {
                     
                       DateTime lastDayOfMonth = DateTime(focusedDay.year, focusedDay.month + 1, 0);
-                      startDate = selectedStartDate + (lastDayOfMonth.day - ProfileCardTwo.cycleDays); 
-                      endDate = startDate + range;
                       
+                     /*  startRange = focusedDay.month - 1 >= startRange.month && savedRanges[focusedDay.month - 1] != null  ? DateTime.utc(focusedDay.year, focusedDay.month, savedRanges[focusedDay.month - 1]![0].subtract(Duration(days: (lastDayOfMonth.day - cycleDays))).day) : savedRanges[originalStartRange.month]![0] ; 
+                      endRange = focusedDay.month - 1 >= startRange.month && savedRanges[focusedDay.month - 1] != null ? DateTime.utc(focusedDay.year, focusedDay.month, savedRanges[focusedDay.month - 1]![1].subtract(Duration(days: (lastDayOfMonth.day - cycleDays))).day) : savedRanges[originalStartRange.month]![1] ; 
+                       */
+                      if (focusedDay.month - 1 >= startRange.month && savedRanges[focusedDay.month - 1] != null) {
+                        DateTime? startValue = savedRanges[focusedDay.month - 1]?[0];
+                        DateTime? endValue = savedRanges[focusedDay.month - 1]?[1];
+                        if (startValue != null && endValue != null) {
+                          startRange = DateTime.utc(
+                            focusedDay.year,
+                            focusedDay.month,
+                            startValue.subtract(Duration(days: (lastDayOfMonth.day - cycleDays))).day
+                          );
+                          endRange = DateTime.utc(
+                            focusedDay.year,
+                            focusedDay.month,
+                            endValue.subtract(Duration(days: (lastDayOfMonth.day - cycleDays))).day
+                          );
+                        }
+                      } else {
+                        DateTime? originalStartValue = savedRanges[originalStartRange.month]?[0];
+                        DateTime? originalEndValue = savedRanges[originalStartRange.month]?[1];
+                        if (originalStartValue != null && originalEndValue != null) {
+                          startRange = originalStartValue;
+                          endRange = originalEndValue;
+                        }
+                      }
+
                       setState(() {
-                      startRange  = DateTime.utc(focusedDay.year, focusedDay.month, startDate + 1);
-                      endRange  = DateTime.utc(focusedDay.year, focusedDay.month, endDate + 1);
+
+                       savedRange.add(startRange);
+                       savedRange.add(endRange);
+                       savedRanges[focusedDay.month] = savedRange;
+                       print(savedRanges);
                       _focusedDay = focusedDay;
                       });
                      
