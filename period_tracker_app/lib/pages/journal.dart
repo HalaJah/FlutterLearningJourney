@@ -6,8 +6,7 @@ import 'package:slide_popup_dialog_null_safety/slide_popup_dialog.dart'
     as slideDialog;
 
 import 'package:flutter_dialogs/flutter_dialogs.dart';
-import 'package:radio_group_v2/radio_group_v2.dart';
-import 'package:period_tracker_app/services/selectMood.dart';
+import 'package:period_tracker_app/customized_widgets/select_mood_pop_up.dart';
 
 class Journal extends StatefulWidget {
   @override
@@ -45,7 +44,6 @@ class _JournalState extends State<Journal> {
     // Fetch screen dimensions for responsive layout
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
-    RadioGroupController myController = RadioGroupController();
 
     return Stack(
       children: [
@@ -161,89 +159,9 @@ class _JournalState extends State<Journal> {
                                           );
                                         case 'Mood':
                                           showPlatformDialog(
-                                            context: context,
-                                            builder: (context) =>
-                                                BasicDialogAlert(
-                                              title: const Text(
-                                                'Select Your Mood',
-                                                style: TextStyle(
-                                                  fontFamily: 'Merriweather',
-                                                  fontSize: 20,
-                                                  color: Color.fromARGB(
-                                                      255, 86, 68, 42),
-                                                ),
-                                              ),
-                                              content: Container(
-                                                  height: 450,
-                                                  child: RadioGroup(
-                                                    decoration:
-                                                        const RadioGroupDecoration(
-                                                      activeColor:
-                                                          Color.fromARGB(255,
-                                                              214, 61, 112),
-                                                    ),
-                                                    controller: myController,
-                                                    values: [
-                                                      SelectMood('confused'),
-                                                      SelectMood('exhausted'),
-                                                      SelectMood('mad'),
-                                                      SelectMood('relaxed'),
-                                                      SelectMood('shocked'),
-                                                      SelectMood('sick'),
-                                                    ],
-                                                  )),
-                                              actions: <Widget>[
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.end,
-                                                  children: [
-                                                    BasicDialogAction(
-                                                      title: const Text(
-                                                        'Cancel',
-                                                        style: TextStyle(
-                                                          fontFamily:
-                                                              'Merriweather',
-                                                          fontSize: 13,
-                                                          color: Color.fromARGB(
-                                                              255,
-                                                              235,
-                                                              110,
-                                                              172),
-                                                        ),
-                                                      ),
-                                                      onPressed: () {
-                                                        Navigator.pop(context);
-                                                      },
-                                                    ),
-                                                    Container(
-                                                      height: 40,
-                                                      color:
-                                                          const Color.fromARGB(
-                                                              255,
-                                                              235,
-                                                              110,
-                                                              172),
-                                                      child: BasicDialogAction(
-                                                        title: const Text(
-                                                          'Okay',
-                                                          style: TextStyle(
-                                                            fontFamily:
-                                                                'Merriweather',
-                                                            fontSize: 13,
-                                                            color: Colors.white,
-                                                          ),
-                                                        ),
-                                                        onPressed: () {
-                                                          Navigator.pop(
-                                                              context);
-                                                        },
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          );
+                                              context: context,
+                                              builder: (context) =>
+                                                  SelectMoodPopUp());
                                       }
                                     },
                                     title: Align(

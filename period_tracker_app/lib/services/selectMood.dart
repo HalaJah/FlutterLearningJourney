@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 class SelectMood extends StatelessWidget {
   String title = '';
-  String imageName = '';
 
   SelectMood(this.title);
 

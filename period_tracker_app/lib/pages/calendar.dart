@@ -6,6 +6,7 @@ import 'package:period_tracker_app/customized_widgets/profile_card2.dart';
 
 class Calendar extends StatefulWidget {
   static String displayedNote = "";
+  static Object? displayedMood = SizedBox.shrink();
 
   @override
   _CalendarState createState() => _CalendarState();
@@ -352,9 +353,9 @@ class _CalendarState extends State<Calendar> {
                       left: 0,
                       bottom: 0,
                       child: Image.asset(
-                        'assets/AddNoteCat.png',
-                        width: screenWidth * 0.3,
-                        height: screenWidth * 0.3,
+                        'assets/noteFlower.png',
+                        width: screenWidth * 0.25,
+                        height: screenWidth * 0.25,
                       ),
                     ),
                   ]),
@@ -366,23 +367,31 @@ class _CalendarState extends State<Calendar> {
                       child: SizedBox(
                           width: screenWidth * 0.395,
                           height: screenWidth * 0.42,
-                          child: const Card(
+                          child: Card(
                               color: Color.fromARGB(255, 247, 252, 186),
                               shadowColor: Colors.black,
                               elevation: 50,
-                              child: Padding(
-                                padding: EdgeInsets.all(5.0),
-                                child: Align(
-                                  alignment: Alignment.topCenter,
-                                  child: Text(
-                                    "Your Mood: ",
-                                    style: TextStyle(
-                                      fontFamily: 'Merriweather',
-                                      fontSize: 10,
-                                      color: Color.fromARGB(255, 46, 44, 44),
+                              child: Column(
+                                children: [
+                                  const Padding(
+                                    padding: EdgeInsets.all(5.0),
+                                    child: Align(
+                                      alignment: Alignment.topCenter,
+                                      child: Text(
+                                        "Your Mood: ",
+                                        style: TextStyle(
+                                          fontFamily: 'Merriweather',
+                                          fontSize: 10,
+                                          color:
+                                              Color.fromARGB(255, 46, 44, 44),
+                                        ),
+                                      ),
                                     ),
                                   ),
-                                ),
+                                  SizedBox(
+                                    child: Calendar.displayedMood as Widget,
+                                  )
+                                ],
                               ))),
                     ),
                     Padding(
