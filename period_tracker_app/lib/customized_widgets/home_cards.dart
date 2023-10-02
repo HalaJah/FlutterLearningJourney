@@ -11,15 +11,13 @@ class HomeCards extends StatefulWidget {
 }
 
 class _HomeCardsState extends State<HomeCards> {
-  
   Color color1 = Colors.white;
   Color color2 = Colors.white;
   Color color3 = Colors.white;
   IconData icon = Icons.arrow_back;
   double width = 0.0;
 
-  void navigate(route)
-  {
+  void navigate(route) {
     Navigator.pushNamed(context, '$route');
   }
 
@@ -30,21 +28,21 @@ class _HomeCardsState extends State<HomeCards> {
       color1 = const Color.fromARGB(255, 232, 191, 126);
       color2 = const Color.fromARGB(255, 245, 178, 90);
       color3 = const Color.fromARGB(255, 92, 65, 46);
-    } 
+    }
     // Colors for 'Journal'
     else if (title == 'Journal') {
       color1 = const Color.fromARGB(255, 255, 192, 203);
       color2 = const Color.fromARGB(255, 252, 137, 172);
       color3 = const Color.fromARGB(255, 179, 25, 107);
-    } 
+    }
     // Colors for 'Profile'
     else if (title == 'Profile') {
       color1 = const Color.fromARGB(255, 154, 195, 236);
       color2 = const Color.fromARGB(255, 114, 157, 199);
       color3 = const Color.fromARGB(255, 28, 70, 104);
-    } 
+    }
     // Colors for 'Settings'
-    else if(title == 'Settings' ) {
+    else if (title == 'Settings') {
       color1 = const Color.fromARGB(255, 186, 185, 182);
       color2 = const Color.fromARGB(255, 109, 108, 106);
       color3 = const Color.fromARGB(255, 69, 57, 49);
@@ -54,7 +52,7 @@ class _HomeCardsState extends State<HomeCards> {
   // Get card width based on title
   double getWidth(String title, double screenWidth) {
     if (title == 'Calendar') {
-      return  (screenWidth * 0.92) - 60;
+      return (screenWidth * 0.92) - 60;
     } else if (title == 'Journal') {
       return (screenWidth * 0.92) - 40;
     } else if (title == 'Profile') {
@@ -91,7 +89,7 @@ class _HomeCardsState extends State<HomeCards> {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
-    if(width == 0.0) {
+    if (width == 0.0) {
       width = getWidth(widget.title, screenWidth);
     }
 
@@ -111,10 +109,15 @@ class _HomeCardsState extends State<HomeCards> {
           // Double-tap to resize the card
           onDoubleTap: () async {
             setState(() {
-               width >= getWidth(widget.title, screenWidth) + 10 
-                ? width = getWidth(widget.title, screenWidth)
-                : width = width + 10;
+              width = width + 5;
             });
+
+            await Future.delayed(const Duration(milliseconds: 500));
+
+            setState(() {
+              width = width - 5;
+            });
+
             await Future.delayed(const Duration(seconds: 1));
             navigate(widget.route);
           },

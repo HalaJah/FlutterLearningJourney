@@ -1,4 +1,7 @@
+import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:flutter/material.dart';
+import 'package:period_tracker_app/customized_widgets/profile_card1.dart';
+import 'package:period_tracker_app/services/selectDate.dart';
 
 // HomeHorizontalCards StatefulWidget
 class HomeHorizontalCards extends StatefulWidget {
@@ -15,6 +18,7 @@ class _HomeHorizontalCardsState extends State<HomeHorizontalCards> {
   Color color1 = Colors.white;
   Color color2 = Colors.white;
   String image = '';
+  List<DateTime?> days = [];
 
   // Set the card colors based on the title
   void getColor(String title) {
@@ -45,15 +49,14 @@ class _HomeHorizontalCardsState extends State<HomeHorizontalCards> {
     getImage(widget.title);
   }
 
- 
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
 
     return Padding(
-      padding: EdgeInsets.fromLTRB(
-          screenWidth * 0.05, screenHeight * 0.05, screenWidth * 0.05, screenHeight * 0.1),
+      padding: EdgeInsets.fromLTRB(screenWidth * 0.05, screenHeight * 0.05,
+          screenWidth * 0.05, screenHeight * 0.1),
       child: SizedBox(
         width: screenWidth * 0.9,
         height: screenWidth * 0.9,
@@ -97,26 +100,35 @@ class _HomeHorizontalCardsState extends State<HomeHorizontalCards> {
                       ),
                       child: Padding(
                         padding: EdgeInsets.fromLTRB(
-                            screenWidth * 0.1, screenWidth * 0.2, screenWidth * 0.15, screenWidth * 0.1),
+                            screenWidth * 0.1,
+                            screenWidth * 0.2,
+                            screenWidth * 0.15,
+                            screenWidth * 0.1),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             // Remaining widgets.
                             Text(
-                              widget.title == 'Period Card' ? '6 Days left' : 'Next Fertile',
+                              widget.title == 'Period Card'
+                                  ? '6 Days left'
+                                  : 'Next Fertile',
                               style: TextStyle(
-                                fontSize: widget.title == 'Period Card' ? 35 : 15, 
+                                fontSize:
+                                    widget.title == 'Period Card' ? 35 : 15,
                                 fontFamily: 'Merriweather',
-                                fontWeight: FontWeight.bold, 
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
                             Text(
-                              widget.title == 'Period Card' ? 'Oct 6-Next Period' : 'Sep 17',
+                              widget.title == 'Period Card'
+                                  ? 'Oct 6-Next Period'
+                                  : 'Sep 17',
                               style: TextStyle(
-                                fontSize: widget.title == 'Period Card' ? 15 : 50, 
+                                fontSize:
+                                    widget.title == 'Period Card' ? 15 : 50,
                                 fontFamily: 'Merriweather',
-                                fontWeight: FontWeight.bold, 
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
                           ],
@@ -125,9 +137,15 @@ class _HomeHorizontalCardsState extends State<HomeHorizontalCards> {
                     ),
                     // Button at the top corner of the left part below the container.
                     Align(
-                      alignment: widget.title == 'Period Card' ? Alignment.topLeft : Alignment.topRight,
+                      alignment: widget.title == 'Period Card'
+                          ? Alignment.topLeft
+                          : Alignment.topRight,
                       child: Padding(
-                        padding: EdgeInsets.fromLTRB(screenWidth * 0.05, screenWidth * 0.02, screenWidth * 0.05, screenWidth * 0.005),
+                        padding: EdgeInsets.fromLTRB(
+                            screenWidth * 0.05,
+                            screenWidth * 0.02,
+                            screenWidth * 0.05,
+                            screenWidth * 0.005),
                         child: Container(
                           width: screenWidth * 0.3,
                           height: screenHeight * 0.04,
@@ -152,16 +170,37 @@ class _HomeHorizontalCardsState extends State<HomeHorizontalCards> {
                           ),
                           child: Align(
                             child: ElevatedButton.icon(
-                              onPressed: () {},
+                              onPressed: () async {
+                                List<DateTime?>? dates =
+                                    await showCalendarDatePicker2Dialog(
+                                  context: context,
+                                  config: SelectDate.dialog,
+                                  dialogSize: const Size(325, 400),
+                                  value: days,
+                                  borderRadius: BorderRadius.circular(15),
+                                );
+                                //Storing start and end date
+                                if (dates != null) {
+                                  setState(() {
+                                    ProfileCardOne.startAndEndDates =
+                                        dates.map((e) => e.toString()).toList();
+                                    //updateStartandEndDates();
+                                  });
+                                }
+                              },
                               icon: Icon(
-                                Icons.favorite, 
-                                color: widget.title == 'Period Card' ? Colors.pink : Colors.pink[100], 
+                                Icons.favorite,
+                                color: widget.title == 'Period Card'
+                                    ? Colors.pink
+                                    : Colors.pink[100],
                                 size: 10,
                               ),
                               label: Text(
-                                widget.title == 'Period Card' ? 'Period starts' : 'Birth control',
+                                widget.title == 'Period Card'
+                                    ? 'Period starts'
+                                    : 'Birth control',
                                 style: const TextStyle(
-                                  fontSize: 9, 
+                                  fontSize: 9,
                                   fontFamily: 'Merriweather',
                                   fontWeight: FontWeight.bold,
                                   color: Color.fromARGB(255, 28, 70, 104),
@@ -200,4 +239,3 @@ class _HomeHorizontalCardsState extends State<HomeHorizontalCards> {
     );
   }
 }
-

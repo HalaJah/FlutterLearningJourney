@@ -41,6 +41,7 @@ dependencies:
   table_calendar: ^3.0.9
   intl: ^0.18.1
   calendar_date_picker2: ^0.5.3
+  slide_popup_dialog_null_safety: ^1.0.0
 
 dev_dependencies:
   flutter_test:

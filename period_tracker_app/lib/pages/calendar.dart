@@ -165,7 +165,10 @@ class _CalendarState extends State<Calendar> {
                        savedRange.add(startRange);
                        savedRange.add(endRange);
                        savedRanges[focusedDay.month] = savedRange;
-                       print(savedRanges);
+                       savedRanges =
+                       {
+                         focusedDay.month : savedRange,
+                       };
                       _focusedDay = focusedDay;
                       });
                      
