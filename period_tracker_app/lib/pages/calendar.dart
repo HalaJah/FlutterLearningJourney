@@ -5,21 +5,30 @@ import 'package:period_tracker_app/customized_widgets/profile_card1.dart';
 import 'package:period_tracker_app/customized_widgets/profile_card2.dart';
 
 class Calendar extends StatefulWidget {
-  
-  
+  static String displayedNote = "";
+
   @override
   _CalendarState createState() => _CalendarState();
 }
 
 class _CalendarState extends State<Calendar> {
   DateTime _focusedDay = DateTime.now();
-  
-  int selectedStartDate = ProfileCardOne.size == 2 ? int.parse(ProfileCardOne.startAndEndDates[0].substring(8,10)) : 1;
-  int selectedEndDate = ProfileCardOne.size == 2 ? int.parse(ProfileCardOne.startAndEndDates[0].substring(8,10)) : 1;
- 
-  DateTime originalStartRange = ProfileCardOne.size == 2 ? DateTime.parse(ProfileCardOne.startAndEndDates[0]).subtract(const Duration(days: 1)) : DateTime.now();
+
+  int selectedStartDate = ProfileCardOne.size == 2
+      ? int.parse(ProfileCardOne.startAndEndDates[0].substring(8, 10))
+      : 1;
+  int selectedEndDate = ProfileCardOne.size == 2
+      ? int.parse(ProfileCardOne.startAndEndDates[0].substring(8, 10))
+      : 1;
+
+  DateTime originalStartRange = ProfileCardOne.size == 2
+      ? DateTime.parse(ProfileCardOne.startAndEndDates[0])
+          .subtract(const Duration(days: 1))
+      : DateTime.now();
   DateTime startRange = DateTime.now();
-  DateTime endRange = ProfileCardOne.size == 2 ? DateTime.parse(ProfileCardOne.startAndEndDates[1]) : DateTime.now();
+  DateTime endRange = ProfileCardOne.size == 2
+      ? DateTime.parse(ProfileCardOne.startAndEndDates[1])
+      : DateTime.now();
 
   int startDate = 0;
   int endDate = 0;
@@ -27,7 +36,7 @@ class _CalendarState extends State<Calendar> {
   int range = 0;
   int cycleDays = 0;
 
-  List<DateTime> savedRange =[];
+  List<DateTime> savedRange = [];
 
   Map<int, List<DateTime>> savedRanges = {};
 
@@ -42,11 +51,8 @@ class _CalendarState extends State<Calendar> {
     savedRange.add(startRange);
     savedRange.add(endRange);
 
-    savedRanges = {
-      startRange.month : savedRange
-    };
+    savedRanges = {startRange.month: savedRange};
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -67,11 +73,11 @@ class _CalendarState extends State<Calendar> {
             ),
           ),
         ),
-        
+
         // Main Scaffold
         Scaffold(
           backgroundColor: Colors.transparent,
-          
+
           // AppBar
           appBar: PreferredSize(
             preferredSize: Size.fromHeight(screenHeight * 0.1),
@@ -102,7 +108,7 @@ class _CalendarState extends State<Calendar> {
               ),
             ),
           ),
-          
+
           // Body of Scaffold
           body: Column(
             children: [
@@ -114,9 +120,10 @@ class _CalendarState extends State<Calendar> {
                   color: const Color.fromARGB(255, 234, 172, 107),
                 ),
               ),
-              
+
               // Calendar Container
               Container(
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
                 width: screenWidth,
                 height: screenWidth,
                 decoration: const BoxDecoration(
@@ -130,58 +137,63 @@ class _CalendarState extends State<Calendar> {
                 ),
                 child: TableCalendar(
                   onPageChanged: (focusedDay) {
-                    
-                      DateTime lastDayOfMonth = DateTime(focusedDay.year, focusedDay.month + 1, 0);
-                      
-                     /*  startRange = focusedDay.month - 1 >= startRange.month && savedRanges[focusedDay.month - 1] != null  ? DateTime.utc(focusedDay.year, focusedDay.month, savedRanges[focusedDay.month - 1]![0].subtract(Duration(days: (lastDayOfMonth.day - cycleDays))).day) : savedRanges[originalStartRange.month]![0] ; 
+                    DateTime lastDayOfMonth =
+                        DateTime(focusedDay.year, focusedDay.month + 1, 0);
+
+                    /*  startRange = focusedDay.month - 1 >= startRange.month && savedRanges[focusedDay.month - 1] != null  ? DateTime.utc(focusedDay.year, focusedDay.month, savedRanges[focusedDay.month - 1]![0].subtract(Duration(days: (lastDayOfMonth.day - cycleDays))).day) : savedRanges[originalStartRange.month]![0] ; 
                       endRange = focusedDay.month - 1 >= startRange.month && savedRanges[focusedDay.month - 1] != null ? DateTime.utc(focusedDay.year, focusedDay.month, savedRanges[focusedDay.month - 1]![1].subtract(Duration(days: (lastDayOfMonth.day - cycleDays))).day) : savedRanges[originalStartRange.month]![1] ; 
                        */
-                      if (focusedDay.month - 1 >= startRange.month && savedRanges[focusedDay.month - 1] != null) {
-                        DateTime? startValue = savedRanges[focusedDay.month - 1]?[0];
-                        DateTime? endValue = savedRanges[focusedDay.month - 1]?[1];
-                        if (startValue != null && endValue != null) {
-                          startRange = DateTime.utc(
+                    if (focusedDay.month - 1 >= startRange.month &&
+                        savedRanges[focusedDay.month - 1] != null) {
+                      DateTime? startValue =
+                          savedRanges[focusedDay.month - 1]?[0];
+                      DateTime? endValue =
+                          savedRanges[focusedDay.month - 1]?[1];
+                      if (startValue != null && endValue != null) {
+                        startRange = DateTime.utc(
                             focusedDay.year,
                             focusedDay.month,
-                            startValue.subtract(Duration(days: (lastDayOfMonth.day - cycleDays))).day
-                          );
-                          endRange = DateTime.utc(
+                            startValue
+                                .subtract(Duration(
+                                    days: (lastDayOfMonth.day - cycleDays)))
+                                .day);
+                        endRange = DateTime.utc(
                             focusedDay.year,
                             focusedDay.month,
-                            endValue.subtract(Duration(days: (lastDayOfMonth.day - cycleDays))).day
-                          );
-                        }
-                      } else {
-                        DateTime? originalStartValue = savedRanges[originalStartRange.month]?[0];
-                        DateTime? originalEndValue = savedRanges[originalStartRange.month]?[1];
-                        if (originalStartValue != null && originalEndValue != null) {
-                          startRange = originalStartValue;
-                          endRange = originalEndValue;
-                        }
+                            endValue
+                                .subtract(Duration(
+                                    days: (lastDayOfMonth.day - cycleDays)))
+                                .day);
                       }
+                    } else {
+                      DateTime? originalStartValue =
+                          savedRanges[originalStartRange.month]?[0];
+                      DateTime? originalEndValue =
+                          savedRanges[originalStartRange.month]?[1];
+                      if (originalStartValue != null &&
+                          originalEndValue != null) {
+                        startRange = originalStartValue;
+                        endRange = originalEndValue;
+                      }
+                    }
 
-                      setState(() {
-
-                       savedRange.add(startRange);
-                       savedRange.add(endRange);
-                       savedRanges[focusedDay.month] = savedRange;
-                       savedRanges =
-                       {
-                         focusedDay.month : savedRange,
-                       };
+                    setState(() {
+                      savedRange.add(startRange);
+                      savedRange.add(endRange);
+                      savedRanges[focusedDay.month] = savedRange;
+                      savedRanges = {
+                        focusedDay.month: savedRange,
+                      };
                       _focusedDay = focusedDay;
-                      });
-                     
-
+                    });
                   },
-                  pageJumpingEnabled:  true,
+                  pageJumpingEnabled: true,
                   shouldFillViewport: true,
 
-                   // Calendar settings
+                  // Calendar settings
                   focusedDay: _focusedDay,
                   firstDay: DateTime(DateTime.now().year - 10),
                   lastDay: DateTime(DateTime.now().year + 10),
-                  
 
                   // Calendar Header Style
                   headerStyle: const HeaderStyle(
@@ -212,31 +224,30 @@ class _CalendarState extends State<Calendar> {
                       ),
                     ),
                   ),
-                  
+
                   // Calendar builders
                   calendarBuilders: CalendarBuilders(
-                    
-                  markerBuilder: (context, date, _) {
-                  if (date.isAfter(startRange) && date.isBefore(endRange) ) {
-                    return Container(
-                      margin: const EdgeInsets.all(4.0),
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 225, 155, 179),
-                        borderRadius: BorderRadius.circular(4.0),
-                      ),
-                      child: Text(
-                        date.day.toString(),
-                        style: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 14,
-                        ),
-                      ),
-                    );
-                  } else {
-                    return null;
-                  }
-                },
+                    markerBuilder: (context, date, _) {
+                      if (date.isAfter(startRange) && date.isBefore(endRange)) {
+                        return Container(
+                          margin: const EdgeInsets.all(4.0),
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: const Color.fromARGB(255, 225, 155, 179),
+                            borderRadius: BorderRadius.circular(4.0),
+                          ),
+                          child: Text(
+                            date.day.toString(),
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 14,
+                            ),
+                          ),
+                        );
+                      } else {
+                        return null;
+                      }
+                    },
 
                     // Today cell builder
                     todayBuilder: (context, date, focusedDay) => Container(
@@ -256,7 +267,7 @@ class _CalendarState extends State<Calendar> {
                         ),
                       ),
                     ),
-                    
+
                     // Default cell builder
                     defaultBuilder: (context, date, events) => Container(
                       margin: const EdgeInsets.all(4.0),
@@ -274,18 +285,18 @@ class _CalendarState extends State<Calendar> {
                       ),
                     ),
 
-                
-                    
                     // Day of Week builder
                     dowBuilder: (context, day) => Container(
                       alignment: Alignment.center,
                       padding: const EdgeInsets.all(0.5),
                       decoration: const BoxDecoration(
                         color: Color.fromARGB(255, 245, 245, 245),
-                        boxShadow: [BoxShadow(
-                          blurRadius: 3,
-                          color: Colors.pink,
-                        )],
+                        boxShadow: [
+                          BoxShadow(
+                            blurRadius: 3,
+                            color: Colors.pink,
+                          )
+                        ],
                       ),
                       child: Text(
                         DateFormat.E().format(day),
@@ -299,6 +310,95 @@ class _CalendarState extends State<Calendar> {
                   ),
                 ),
               ),
+              Row(children: [
+                Padding(
+                  padding: const EdgeInsets.all(5),
+                  child: Stack(children: [
+                    SizedBox(
+                      width: screenWidth * 0.53,
+                      height: screenWidth * 0.85,
+                      child: Card(
+                          color: const Color.fromARGB(255, 242, 171, 195),
+                          shadowColor: Colors.black,
+                          elevation: 50,
+                          child: Column(
+                            children: [
+                              const Padding(
+                                padding: EdgeInsets.all(10.0),
+                                child: Text("Notes: ",
+                                    style: TextStyle(
+                                      fontFamily: 'Merriweather',
+                                      fontSize: 13,
+                                      color: Colors.white,
+                                    )),
+                              ),
+                              Align(
+                                alignment: Alignment.topLeft,
+                                child: Padding(
+                                    padding: const EdgeInsets.fromLTRB(
+                                        15.0, 10.0, 15.0, 10.0),
+                                    child: Text(Calendar.displayedNote,
+                                        style: const TextStyle(
+                                          fontFamily: 'Merriweather',
+                                          fontSize: 10,
+                                          color:
+                                              Color.fromARGB(255, 46, 44, 44),
+                                        ))),
+                              )
+                            ],
+                          )),
+                    ),
+                    Positioned(
+                      left: 0,
+                      bottom: 0,
+                      child: Image.asset(
+                        'assets/AddNoteCat.png',
+                        width: screenWidth * 0.3,
+                        height: screenWidth * 0.3,
+                      ),
+                    ),
+                  ]),
+                ),
+                Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: SizedBox(
+                          width: screenWidth * 0.395,
+                          height: screenWidth * 0.42,
+                          child: const Card(
+                              color: Color.fromARGB(255, 247, 252, 186),
+                              shadowColor: Colors.black,
+                              elevation: 50,
+                              child: Padding(
+                                padding: EdgeInsets.all(5.0),
+                                child: Align(
+                                  alignment: Alignment.topCenter,
+                                  child: Text(
+                                    "Your Mood: ",
+                                    style: TextStyle(
+                                      fontFamily: 'Merriweather',
+                                      fontSize: 10,
+                                      color: Color.fromARGB(255, 46, 44, 44),
+                                    ),
+                                  ),
+                                ),
+                              ))),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: SizedBox(
+                          width: screenWidth * 0.395,
+                          height: screenWidth * 0.42,
+                          child: const Card(
+                            color: Color.fromARGB(255, 171, 210, 242),
+                            shadowColor: Colors.black,
+                            elevation: 50,
+                          )),
+                    )
+                  ],
+                )
+              ])
             ],
           ),
         ),

@@ -5,6 +5,10 @@ import 'package:period_tracker_app/customized_widgets/slidePopup.dart';
 import 'package:slide_popup_dialog_null_safety/slide_popup_dialog.dart'
     as slideDialog;
 
+import 'package:flutter_dialogs/flutter_dialogs.dart';
+import 'package:radio_group_v2/radio_group_v2.dart';
+import 'package:period_tracker_app/services/selectMood.dart';
+
 class Journal extends StatefulWidget {
   @override
   _JournalState createState() => _JournalState();
@@ -14,7 +18,7 @@ class _JournalState extends State<Journal> {
   // Declare a list of ListViewWidget objects
   List<ListViewWidget> listView = [
     ListViewWidget('Note', 'solidNoteSticky'),
-    ListViewWidget('Moods', 'faceFrownOpen'),
+    ListViewWidget('Mood', 'faceFrownOpen'),
     ListViewWidget('Flow', 'droplet'),
     ListViewWidget('Drink Water', 'glassWater'),
   ];
@@ -41,6 +45,7 @@ class _JournalState extends State<Journal> {
     // Fetch screen dimensions for responsive layout
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
+    RadioGroupController myController = RadioGroupController();
 
     return Stack(
       children: [
@@ -98,106 +103,189 @@ class _JournalState extends State<Journal> {
               Padding(
                 padding: EdgeInsets.fromLTRB(screenWidth * 0.05,
                     screenWidth * 0.1, screenWidth * 0.05, screenWidth * 0.05),
-                child: SingleChildScrollView(
-                  child: Stack(
-                    alignment: Alignment.topCenter,
-                    children: [
-                      // White background container
-                      Container(
-                        width: screenWidth * 0.9,
-                        height: screenHeight * 0.8,
-                        decoration: const BoxDecoration(
-                          color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black,
-                              offset: Offset(0, 1),
-                              blurRadius: 10,
-                              spreadRadius: 0,
-                            ),
-                          ],
-                        ),
+                child: Stack(
+                  alignment: Alignment.topCenter,
+                  children: [
+                    // White background container
+                    Container(
+                      width: screenWidth * 0.9,
+                      height: screenHeight * 0.8,
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black,
+                            offset: Offset(0, 1),
+                            blurRadius: 10,
+                            spreadRadius: 0,
+                          ),
+                        ],
                       ),
-                      // Image at the top
-                      Positioned(
-                        top: 0,
-                        child: Image.asset(
-                          'assets/HangingCats2.jpg',
-                          width: screenWidth * 0.8,
-                          height: screenHeight * 0.2,
-                        ),
+                    ),
+                    // Image at the top
+                    Positioned(
+                      top: 0,
+                      child: Image.asset(
+                        'assets/HangingCats2.jpg',
+                        width: screenWidth * 0.8,
+                        height: screenHeight * 0.2,
                       ),
-                      // ListView.builder for the cards
-                      Positioned(
-                        bottom: 0,
-                        child: SizedBox(
-                          width: screenWidth * 0.8,
-                          height: screenHeight * 0.6,
-                          child: ListView.builder(
-                            itemCount: 4,
-                            itemBuilder: (context, index) {
-                              return Padding(
-                                padding: EdgeInsets.symmetric(
-                                    vertical: screenWidth * 0.005,
-                                    horizontal: screenWidth * 0.005),
-                                child: SizedBox(
-                                  height: screenWidth * 0.25,
-                                  child: Card(
-                                    elevation: 4.0,
-                                    shadowColor: Colors.black,
-                                    child: ListTile(
-                                      onTap: () {
-                                        switch (listView[index].title) {
-                                          case 'Note':
-                                            slideDialog.showSlideDialog(
-                                              pillColor: Colors.pink[100],
-                                              context: context,
-                                              child: SingleChildScrollView(
-                                                  child: SlidePopUp()),
-                                            );
-                                        }
-                                      },
-                                      title: Align(
-                                        alignment: Alignment.centerLeft,
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(
-                                              listView[index].title,
-                                              style: const TextStyle(
-                                                fontFamily: 'Merriweather',
-                                                fontSize: 21,
-                                                fontWeight: FontWeight.bold,
-                                                color: Color.fromARGB(
-                                                    255, 113, 83, 41),
+                    ),
+                    // ListView.builder for the cards
+                    Positioned(
+                      bottom: 0,
+                      child: SizedBox(
+                        width: screenWidth * 0.8,
+                        height: screenHeight * 0.6,
+                        child: ListView.builder(
+                          itemCount: 4,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: screenWidth * 0.005,
+                                  horizontal: screenWidth * 0.005),
+                              child: SizedBox(
+                                height: screenWidth * 0.25,
+                                child: Card(
+                                  elevation: 4.0,
+                                  shadowColor: Colors.black,
+                                  child: ListTile(
+                                    onTap: () {
+                                      switch (listView[index].title) {
+                                        case 'Note':
+                                          slideDialog.showSlideDialog(
+                                            pillColor: Colors.pink[100],
+                                            context: context,
+                                            child: SingleChildScrollView(
+                                                child: SlidePopUp()),
+                                          );
+                                        case 'Mood':
+                                          showPlatformDialog(
+                                            context: context,
+                                            builder: (context) =>
+                                                BasicDialogAlert(
+                                              title: const Text(
+                                                'Select Your Mood',
+                                                style: TextStyle(
+                                                  fontFamily: 'Merriweather',
+                                                  fontSize: 20,
+                                                  color: Color.fromARGB(
+                                                      255, 86, 68, 42),
+                                                ),
                                               ),
+                                              content: Container(
+                                                  height: 450,
+                                                  child: RadioGroup(
+                                                    decoration:
+                                                        const RadioGroupDecoration(
+                                                      activeColor:
+                                                          Color.fromARGB(255,
+                                                              214, 61, 112),
+                                                    ),
+                                                    controller: myController,
+                                                    values: [
+                                                      SelectMood('confused'),
+                                                      SelectMood('exhausted'),
+                                                      SelectMood('mad'),
+                                                      SelectMood('relaxed'),
+                                                      SelectMood('shocked'),
+                                                      SelectMood('sick'),
+                                                    ],
+                                                  )),
+                                              actions: <Widget>[
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.end,
+                                                  children: [
+                                                    BasicDialogAction(
+                                                      title: const Text(
+                                                        'Cancel',
+                                                        style: TextStyle(
+                                                          fontFamily:
+                                                              'Merriweather',
+                                                          fontSize: 13,
+                                                          color: Color.fromARGB(
+                                                              255,
+                                                              235,
+                                                              110,
+                                                              172),
+                                                        ),
+                                                      ),
+                                                      onPressed: () {
+                                                        Navigator.pop(context);
+                                                      },
+                                                    ),
+                                                    Container(
+                                                      height: 40,
+                                                      color:
+                                                          const Color.fromARGB(
+                                                              255,
+                                                              235,
+                                                              110,
+                                                              172),
+                                                      child: BasicDialogAction(
+                                                        title: const Text(
+                                                          'Okay',
+                                                          style: TextStyle(
+                                                            fontFamily:
+                                                                'Merriweather',
+                                                            fontSize: 13,
+                                                            color: Colors.white,
+                                                          ),
+                                                        ),
+                                                        onPressed: () {
+                                                          Navigator.pop(
+                                                              context);
+                                                        },
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
                                             ),
-                                            const Icon(
-                                              Icons.arrow_forward_ios_rounded,
+                                          );
+                                      }
+                                    },
+                                    title: Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            listView[index].title,
+                                            style: const TextStyle(
+                                              fontFamily: 'Merriweather',
+                                              fontSize: 21,
+                                              fontWeight: FontWeight.bold,
                                               color: Color.fromARGB(
                                                   255, 113, 83, 41),
                                             ),
-                                          ],
-                                        ),
+                                          ),
+                                          const Icon(
+                                            Icons.arrow_forward_ios_rounded,
+                                            color: Color.fromARGB(
+                                                255, 113, 83, 41),
+                                          ),
+                                        ],
                                       ),
-                                      // Icon leading the card
-                                      leading: Icon(
-                                        getIconByName(listView[index].iconName),
-                                        size: 50,
-                                        color: const Color.fromRGBO(
-                                            249, 166, 194, 1),
-                                      ),
+                                    ),
+                                    // Icon leading the card
+                                    leading: Icon(
+                                      getIconByName(listView[index].iconName),
+                                      size: 50,
+                                      color: const Color.fromRGBO(
+                                          249, 166, 194, 1),
                                     ),
                                   ),
                                 ),
-                              );
-                            },
-                          ),
+                              ),
+                            );
+                          },
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ],

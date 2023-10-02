@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:period_tracker_app/pages/calendar.dart';
 
 class SlidePopUp extends StatefulWidget {
   SlidePopUp();
@@ -46,7 +47,9 @@ class _SlidePopUp extends State<SlidePopUp> {
                   fontSize: 10,
                   color: Color.fromARGB(255, 59, 53, 43),
                 ),
-                onSubmitted: (value) {},
+                onSubmitted: (value) {
+                  Calendar.displayedNote = value;
+                },
               ),
             ],
           ),
