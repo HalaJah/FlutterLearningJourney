@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:core';
 
 // ProfileCardTwo Stateful Widget
 class ProfileCardTwo extends StatefulWidget {
@@ -11,12 +12,11 @@ class ProfileCardTwo extends StatefulWidget {
 
 class _ProfileCardTwo extends State<ProfileCardTwo> {
   TextEditingController _controller = TextEditingController();
- /*  void updateCycleDays(){
+  /*  void updateCycleDays(){
     Navigator.pushNamed(context, '/calendar', arguments: {
       'cycleDays': ProfileCardTwo.cycleDays
     });
   } */
-  
 
   @override
   Widget build(BuildContext context) {
@@ -81,32 +81,41 @@ class _ProfileCardTwo extends State<ProfileCardTwo> {
             Positioned(
               bottom: screenWidth * 0.22,
               left: screenWidth * 0.35,
-          
-                  child: SizedBox(
-                    width: screenWidth*0.2,
-                    height: screenWidth*0.2,
-                    child: TextField(
-                      cursorColor: const Color.fromRGBO(222, 74, 123, 1),
-                      showCursor: true,
-                      decoration: const InputDecoration(
-                        border: InputBorder.none,
-                       ),
-                      style: const TextStyle(
+              child: SizedBox(
+                width: screenWidth * 0.2,
+                height: screenWidth * 0.2,
+                child: TextField(
+                  cursorColor: const Color.fromRGBO(222, 74, 123, 1),
+                  autofocus: true,
+                  showCursor: true,
+                  decoration: const InputDecoration(
+                      border: InputBorder.none,
+                      hintText: 'Tap to Enter',
+                      hintStyle: TextStyle(
                         fontFamily: 'Merriweather',
-                        fontSize: 30,
-                        color: Color.fromARGB(255, 59, 53, 43),
-                      ),
-                      controller: _controller,
-                      onSubmitted: (value) {
-                        setState(() {
-                          ProfileCardTwo.cycleDays = int.parse(value);
-                          //updateCycleDays();
-
-                        });
-                      },
-                    ),
+                        fontSize: 11,
+                        color: Colors.white,
+                      )),
+                  style: const TextStyle(
+                    fontFamily: 'Merriweather',
+                    fontSize: 30,
+                    color: Color.fromARGB(255, 59, 53, 43),
                   ),
-                
+                  controller: _controller,
+                  onSubmitted: (value) {
+                    setState(() {
+                      try {
+                        ProfileCardTwo.cycleDays = int.parse(value);
+                      } catch (e) {
+                        if (e is FormatException) {
+                          ProfileCardTwo.cycleDays = 0;
+                        }
+                      }
+                      //updateCycleDays();
+                    });
+                  },
+                ),
+              ),
             ),
             // Positioned Image
             Positioned(
@@ -124,4 +133,3 @@ class _ProfileCardTwo extends State<ProfileCardTwo> {
     );
   }
 }
- 

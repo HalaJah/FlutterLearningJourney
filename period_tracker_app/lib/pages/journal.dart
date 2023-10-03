@@ -7,6 +7,8 @@ import 'package:slide_popup_dialog_null_safety/slide_popup_dialog.dart'
 
 import 'package:flutter_dialogs/flutter_dialogs.dart';
 import 'package:period_tracker_app/customized_widgets/select_mood_pop_up.dart';
+import 'package:period_tracker_app/customized_widgets/select_flow_pop_up.dart';
+import 'package:period_tracker_app/customized_widgets/select_water_pop_up.dart';
 
 class Journal extends StatefulWidget {
   @override
@@ -45,171 +47,196 @@ class _JournalState extends State<Journal> {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
 
-    return Stack(
-      children: [
-        // Background container
-        Container(
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/WoodTwo.jpg'),
-              fit: BoxFit.cover,
+    return Padding(
+      padding:
+          EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+      child: Stack(
+        children: [
+          // Background container
+          Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/WoodTwo.jpg'),
+                fit: BoxFit.cover,
+              ),
             ),
           ),
-        ),
-        // Scaffold for the main content
-        Scaffold(
-          backgroundColor: Colors.transparent,
-          // AppBar
-          appBar: PreferredSize(
-            preferredSize: Size.fromHeight(screenHeight * 0.1),
-            child: Container(
-              height: screenWidth * 0.23,
-              decoration: const BoxDecoration(
-                border: Border(
-                  bottom: BorderSide(
-                    width: 2.0,
-                    color: Color.fromARGB(255, 207, 134, 32),
+          // Scaffold for the main content
+          Scaffold(
+            resizeToAvoidBottomInset: false,
+            backgroundColor: Colors.transparent,
+            // AppBar
+            appBar: PreferredSize(
+              preferredSize: Size.fromHeight(screenHeight * 0.1),
+              child: Container(
+                height: screenWidth * 0.23,
+                decoration: const BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(
+                      width: 2.0,
+                      color: Color.fromARGB(255, 207, 134, 32),
+                    ),
                   ),
                 ),
-              ),
-              child: AppBar(
-                iconTheme: const IconThemeData(
-                  color: Color.fromARGB(255, 146, 99, 35),
-                ),
-                backgroundColor: Colors.transparent,
-                shadowColor: Colors.transparent,
-                title: const Text(
-                  'Journal',
-                  style: TextStyle(
-                    fontFamily: 'Merriweather',
-                    fontSize: 23,
+                child: AppBar(
+                  iconTheme: const IconThemeData(
                     color: Color.fromARGB(255, 146, 99, 35),
                   ),
+                  backgroundColor: Colors.transparent,
+                  shadowColor: Colors.transparent,
+                  title: const Text(
+                    'Journal',
+                    style: TextStyle(
+                      fontFamily: 'Merriweather',
+                      fontSize: 23,
+                      color: Color.fromARGB(255, 146, 99, 35),
+                    ),
+                  ),
                 ),
               ),
             ),
-          ),
-          // Main Body Content
-          body: Column(
-            children: [
-              // Shadow-like effect
-              Container(
-                height: 1,
-                color: const Color.fromARGB(255, 240, 211, 180),
-              ),
-              // Padding for the main content
-              Padding(
-                padding: EdgeInsets.fromLTRB(screenWidth * 0.05,
-                    screenWidth * 0.1, screenWidth * 0.05, screenWidth * 0.05),
-                child: Stack(
-                  alignment: Alignment.topCenter,
-                  children: [
-                    // White background container
-                    Container(
-                      width: screenWidth * 0.9,
-                      height: screenHeight * 0.8,
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black,
-                            offset: Offset(0, 1),
-                            blurRadius: 10,
-                            spreadRadius: 0,
-                          ),
-                        ],
+            // Main Body Content
+            body: Column(
+              children: [
+                // Shadow-like effect
+                Container(
+                  height: 1,
+                  color: const Color.fromARGB(255, 240, 211, 180),
+                ),
+                // Padding for the main content
+                Padding(
+                  padding: EdgeInsets.fromLTRB(
+                      screenWidth * 0.05,
+                      screenWidth * 0.1,
+                      screenWidth * 0.05,
+                      screenWidth * 0.05),
+                  child: Stack(
+                    alignment: Alignment.topCenter,
+                    children: [
+                      // White background container
+                      Container(
+                        width: screenWidth * 0.9,
+                        height: screenHeight * 0.8,
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black,
+                              offset: Offset(0, 1),
+                              blurRadius: 10,
+                              spreadRadius: 0,
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                    // Image at the top
-                    Positioned(
-                      top: 0,
-                      child: Image.asset(
-                        'assets/HangingCats2.jpg',
-                        width: screenWidth * 0.8,
-                        height: screenHeight * 0.2,
+
+                      // Image at the top
+                      Positioned(
+                        top: 0,
+                        child: Image.asset(
+                          'assets/HangingCats2.jpg',
+                          width: screenWidth * 0.8,
+                          height: screenHeight * 0.2,
+                        ),
                       ),
-                    ),
-                    // ListView.builder for the cards
-                    Positioned(
-                      bottom: 0,
-                      child: SizedBox(
-                        width: screenWidth * 0.8,
-                        height: screenHeight * 0.6,
-                        child: ListView.builder(
-                          itemCount: 4,
-                          itemBuilder: (context, index) {
-                            return Padding(
-                              padding: EdgeInsets.symmetric(
-                                  vertical: screenWidth * 0.005,
-                                  horizontal: screenWidth * 0.005),
-                              child: SizedBox(
-                                height: screenWidth * 0.25,
-                                child: Card(
-                                  elevation: 4.0,
-                                  shadowColor: Colors.black,
-                                  child: ListTile(
-                                    onTap: () {
-                                      switch (listView[index].title) {
-                                        case 'Note':
-                                          slideDialog.showSlideDialog(
-                                            pillColor: Colors.pink[100],
-                                            context: context,
-                                            child: SingleChildScrollView(
-                                                child: SlidePopUp()),
-                                          );
-                                        case 'Mood':
-                                          showPlatformDialog(
+                      // ListView.builder for the cards
+                      Positioned(
+                        bottom: 0,
+                        child: SizedBox(
+                          width: screenWidth * 0.8,
+                          height: screenHeight * 0.6,
+                          child: ListView.builder(
+                            itemCount: 4,
+                            itemBuilder: (context, index) {
+                              return Padding(
+                                padding: EdgeInsets.symmetric(
+                                    vertical: screenWidth * 0.005,
+                                    horizontal: screenWidth * 0.005),
+                                child: SizedBox(
+                                  height: screenWidth * 0.25,
+                                  child: Card(
+                                    elevation: 4.0,
+                                    shadowColor: Colors.black,
+                                    child: ListTile(
+                                      onTap: () {
+                                        switch (listView[index].title) {
+                                          case 'Note':
+                                            slideDialog.showSlideDialog(
+                                              barrierDismissible: false,
+                                              pillColor: Colors.pink[100],
                                               context: context,
-                                              builder: (context) =>
-                                                  SelectMoodPopUp());
-                                      }
-                                    },
-                                    title: Align(
-                                      alignment: Alignment.centerLeft,
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            listView[index].title,
-                                            style: const TextStyle(
-                                              fontFamily: 'Merriweather',
-                                              fontSize: 21,
-                                              fontWeight: FontWeight.bold,
+                                              child: SlidePopUp(),
+                                            );
+                                            break;
+                                          case 'Mood':
+                                            showPlatformDialog(
+                                                context: context,
+                                                builder: (context) =>
+                                                    SelectMoodPopUp());
+                                            break;
+                                          case 'Flow':
+                                            showPlatformDialog(
+                                                context: context,
+                                                builder: (context) =>
+                                                    SelectFlowPopUp());
+
+                                            break;
+                                          case 'Drink Water':
+                                            showPlatformDialog(
+                                                context: context,
+                                                builder: (context) =>
+                                                    SelectWaterPopUp());
+
+                                            break;
+                                        }
+                                      },
+                                      title: Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              listView[index].title,
+                                              style: const TextStyle(
+                                                fontFamily: 'Merriweather',
+                                                fontSize: 21,
+                                                fontWeight: FontWeight.bold,
+                                                color: Color.fromARGB(
+                                                    255, 113, 83, 41),
+                                              ),
+                                            ),
+                                            const Icon(
+                                              Icons.arrow_forward_ios_rounded,
                                               color: Color.fromARGB(
                                                   255, 113, 83, 41),
                                             ),
-                                          ),
-                                          const Icon(
-                                            Icons.arrow_forward_ios_rounded,
-                                            color: Color.fromARGB(
-                                                255, 113, 83, 41),
-                                          ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                    // Icon leading the card
-                                    leading: Icon(
-                                      getIconByName(listView[index].iconName),
-                                      size: 50,
-                                      color: const Color.fromRGBO(
-                                          249, 166, 194, 1),
+                                      // Icon leading the card
+                                      leading: Icon(
+                                        getIconByName(listView[index].iconName),
+                                        size: 50,
+                                        color: const Color.fromRGBO(
+                                            249, 166, 194, 1),
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            );
-                          },
+                              );
+                            },
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

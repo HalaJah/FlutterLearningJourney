@@ -7,6 +7,8 @@ import 'package:period_tracker_app/customized_widgets/profile_card2.dart';
 class Calendar extends StatefulWidget {
   static String displayedNote = "";
   static Object? displayedMood = SizedBox.shrink();
+  static Object? displayedFlow = SizedBox.shrink();
+  static Object? displayedWater = SizedBox.shrink();
 
   @override
   _CalendarState createState() => _CalendarState();
@@ -339,6 +341,7 @@ class _CalendarState extends State<Calendar> {
                                     padding: const EdgeInsets.fromLTRB(
                                         15.0, 10.0, 15.0, 10.0),
                                     child: Text(Calendar.displayedNote,
+                                        textAlign: TextAlign.justify,
                                         style: const TextStyle(
                                           fontFamily: 'Merriweather',
                                           fontSize: 10,
@@ -368,7 +371,7 @@ class _CalendarState extends State<Calendar> {
                           width: screenWidth * 0.395,
                           height: screenWidth * 0.42,
                           child: Card(
-                              color: Color.fromARGB(255, 247, 252, 186),
+                              color: const Color.fromARGB(255, 247, 252, 186),
                               shadowColor: Colors.black,
                               elevation: 50,
                               child: Column(
@@ -399,11 +402,62 @@ class _CalendarState extends State<Calendar> {
                       child: SizedBox(
                           width: screenWidth * 0.395,
                           height: screenWidth * 0.42,
-                          child: const Card(
-                            color: Color.fromARGB(255, 171, 210, 242),
-                            shadowColor: Colors.black,
-                            elevation: 50,
-                          )),
+                          child: Card(
+                              color: const Color.fromARGB(255, 171, 210, 242),
+                              shadowColor: Colors.black,
+                              elevation: 50,
+                              child: Column(
+                                children: [
+                                  const Padding(
+                                    padding: EdgeInsets.fromLTRB(5, 5, 5, 0),
+                                    child: Align(
+                                      alignment: Alignment.topCenter,
+                                      child: Text(
+                                        "Blood flow: ",
+                                        style: TextStyle(
+                                          fontFamily: 'Merriweather',
+                                          fontSize: 10,
+                                          color:
+                                              Color.fromARGB(255, 46, 44, 44),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                    width: screenWidth * 0.395,
+                                    height: screenWidth * 0.12,
+                                    child: SizedBox(
+                                      child: Calendar.displayedFlow as Widget,
+                                    ),
+                                  ),
+                                  const Padding(
+                                    padding: EdgeInsets.fromLTRB(5, 5, 5, 0),
+                                    child: Align(
+                                      alignment: Alignment.topCenter,
+                                      child: Text(
+                                        "Drinking water: ",
+                                        style: TextStyle(
+                                          fontFamily: 'Merriweather',
+                                          fontSize: 10,
+                                          color:
+                                              Color.fromARGB(255, 46, 44, 44),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                    width: screenWidth * 0.395,
+                                    height: screenWidth * 0.12,
+                                    child: SizedBox(
+                                      child: Calendar.displayedWater as Widget,
+                                    ),
+                                  ),
+                                ],
+                              ))),
                     )
                   ],
                 )

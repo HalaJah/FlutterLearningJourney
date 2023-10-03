@@ -1,23 +1,21 @@
 import 'package:flutter_dialogs/flutter_dialogs.dart';
 import 'package:radio_group_v2/radio_group_v2.dart';
-import 'package:period_tracker_app/services/selectMood.dart';
+import 'package:period_tracker_app/services/selectWater.dart';
 import 'package:flutter/material.dart';
 import 'package:period_tracker_app/pages/calendar.dart';
 
-class SelectMoodPopUp extends StatefulWidget {
+class SelectWaterPopUp extends StatefulWidget {
   @override
-  _SelectMoodPopUpState createState() => _SelectMoodPopUpState();
+  _SelectWaterPopUpState createState() => _SelectWaterPopUpState();
 }
 
-class _SelectMoodPopUpState extends State<SelectMoodPopUp> {
+class _SelectWaterPopUpState extends State<SelectWaterPopUp> {
   RadioGroupController myController = RadioGroupController();
 
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-
     return BasicDialogAlert(
       title: const Text(
-        'Select Your Mood',
+        'Select The Level of Water You Drink Per Day: ',
         style: TextStyle(
           fontFamily: 'Merriweather',
           fontSize: 20,
@@ -25,19 +23,17 @@ class _SelectMoodPopUpState extends State<SelectMoodPopUp> {
         ),
       ),
       content: SizedBox(
-          height: 450,
+          height: 200,
           child: RadioGroup(
             decoration: const RadioGroupDecoration(
-              activeColor: Color.fromARGB(255, 214, 61, 112),
+              activeColor: Color.fromARGB(255, 57, 185, 202),
             ),
             controller: myController,
             values: [
-              SelectMood('confused'),
-              SelectMood('exhausted'),
-              SelectMood('mad'),
-              SelectMood('relaxed'),
-              SelectMood('shocked'),
-              SelectMood('sick'),
+              SelectWater(1),
+              SelectWater(2),
+              SelectWater(3),
+              SelectWater(4),
             ],
           )),
       actions: <Widget>[
@@ -50,7 +46,7 @@ class _SelectMoodPopUpState extends State<SelectMoodPopUp> {
                 style: TextStyle(
                   fontFamily: 'Merriweather',
                   fontSize: 13,
-                  color: Color.fromARGB(255, 235, 110, 172),
+                  color: Color.fromARGB(255, 116, 218, 241),
                 ),
               ),
               onPressed: () {
@@ -59,7 +55,7 @@ class _SelectMoodPopUpState extends State<SelectMoodPopUp> {
             ),
             Container(
               height: 40,
-              color: const Color.fromARGB(255, 235, 110, 172),
+              color: const Color.fromARGB(255, 111, 200, 218),
               child: BasicDialogAction(
                 title: const Text(
                   'Okay',
@@ -70,18 +66,11 @@ class _SelectMoodPopUpState extends State<SelectMoodPopUp> {
                   ),
                 ),
                 onPressed: () {
-                  SelectMood selected = myController.value != null
-                      ? myController.value as SelectMood
-                      : SelectMood("");
+                  SelectWater selected = myController.value != null
+                      ? myController.value as SelectWater
+                      : SelectWater(0);
 
-                  Calendar.displayedMood = (selected.title.isNotEmpty)
-                      ? Image.asset(
-                          'assets/${selected.title}.gif',
-                          width: screenWidth * 0.25,
-                          height: screenWidth * 0.25,
-                        )
-                      : Calendar.displayedMood;
-
+                  Calendar.displayedWater = selected;
                   Navigator.pop(context);
                 },
               ),

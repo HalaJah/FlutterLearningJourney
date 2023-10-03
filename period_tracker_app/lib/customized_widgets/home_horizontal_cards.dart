@@ -149,72 +149,81 @@ class _HomeHorizontalCardsState extends State<HomeHorizontalCards> {
                         child: Container(
                           width: screenWidth * 0.3,
                           height: screenHeight * 0.04,
-                          decoration: const BoxDecoration(
-                            borderRadius: BorderRadius.all(
+                          decoration: BoxDecoration(
+                            borderRadius: const BorderRadius.all(
                               Radius.circular(30),
                             ),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black,
-                                blurRadius: 5,
-                                spreadRadius: 0,
-                              ),
-                            ],
-                            gradient: LinearGradient(
-                              colors: <Color>[
-                                Color.fromARGB(255, 114, 157, 199),
-                                Color.fromARGB(255, 154, 195, 236),
-                                Color.fromARGB(255, 114, 157, 199),
-                              ],
-                            ),
+                            boxShadow: widget.title == 'Period Card'
+                                ? const [
+                                    BoxShadow(
+                                      color: Colors.black,
+                                      blurRadius: 5,
+                                      spreadRadius: 0,
+                                    ),
+                                  ]
+                                : null,
+                            gradient: widget.title == 'Period Card'
+                                ? const LinearGradient(
+                                    colors: <Color>[
+                                      Color.fromARGB(255, 114, 157, 199),
+                                      Color.fromARGB(255, 154, 195, 236),
+                                      Color.fromARGB(255, 114, 157, 199),
+                                    ],
+                                  )
+                                : null,
                           ),
-                          child: Align(
-                            child: ElevatedButton.icon(
-                              onPressed: () async {
-                                List<DateTime?>? dates =
-                                    await showCalendarDatePicker2Dialog(
-                                  context: context,
-                                  config: SelectDate.dialog,
-                                  dialogSize: const Size(325, 400),
-                                  value: days,
-                                  borderRadius: BorderRadius.circular(15),
-                                );
-                                //Storing start and end date
-                                if (dates != null) {
-                                  setState(() {
-                                    ProfileCardOne.startAndEndDates =
-                                        dates.map((e) => e.toString()).toList();
-                                    //updateStartandEndDates();
-                                  });
-                                }
-                              },
-                              icon: Icon(
-                                Icons.favorite,
-                                color: widget.title == 'Period Card'
-                                    ? Colors.pink
-                                    : Colors.pink[100],
-                                size: 10,
-                              ),
-                              label: Text(
-                                widget.title == 'Period Card'
-                                    ? 'Period starts'
-                                    : 'Birth control',
-                                style: const TextStyle(
-                                  fontSize: 9,
-                                  fontFamily: 'Merriweather',
-                                  fontWeight: FontWeight.bold,
-                                  color: Color.fromARGB(255, 28, 70, 104),
-                                ),
-                              ),
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.transparent,
-                                shadowColor: Colors.transparent,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(30.0),
-                                ),
-                              ),
-                            ),
-                          ),
+                          child: widget.title == 'Period Card'
+                              ? Align(
+                                  child: ElevatedButton.icon(
+                                    onPressed: () async {
+                                      List<DateTime?>? dates =
+                                          await showCalendarDatePicker2Dialog(
+                                        context: context,
+                                        config: SelectDate.dialog,
+                                        dialogSize: const Size(325, 400),
+                                        value: days,
+                                        borderRadius: BorderRadius.circular(15),
+                                      );
+                                      //Storing start and end date
+                                      if (dates != null) {
+                                        setState(() {
+                                          ProfileCardOne.startAndEndDates =
+                                              dates
+                                                  .map((e) => e.toString())
+                                                  .toList();
+                                          //updateStartandEndDates();
+                                        });
+                                      }
+                                    },
+                                    icon: Icon(
+                                      Icons.favorite,
+                                      color: widget.title == 'Period Card'
+                                          ? Colors.pink
+                                          : Colors.transparent,
+                                      size: 10,
+                                    ),
+                                    label: Text(
+                                      widget.title == 'Period Card'
+                                          ? 'Period starts'
+                                          : '',
+                                      style: const TextStyle(
+                                        fontSize: 9,
+                                        fontFamily: 'Merriweather',
+                                        fontWeight: FontWeight.bold,
+                                        color: Color.fromARGB(255, 28, 70, 104),
+                                      ),
+                                    ),
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.transparent,
+                                      shadowColor: Colors.transparent,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(30.0),
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              : null,
                         ),
                       ),
                     ),
