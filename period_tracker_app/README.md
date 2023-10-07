@@ -34,7 +34,7 @@ The Homepage features two horizontally-scrollable cards that display the fertile
 
 **Profile Page:**
 
-In the profile page, users input their period information, including the start date, end date, and cycle days. The dates are entered using an animated plus button that reveals a calendar dialog. Meanwhile, the cycle days are input via a text field located in the second card.
+In the Profile page, users input their period information, including the start date, end date, and cycle days. The dates are entered using an animated plus button that reveals a calendar dialog. Meanwhile, the cycle days are input via a text field located in the second card.
 
 <table>
   <tr>
@@ -45,7 +45,7 @@ In the profile page, users input their period information, including the start d
 
 **Journal Page:**
 
-The journal page features pop-up cards. When a user clicks on one of these cards, they can select mood, blood flow, and drinking water options. The chosen details will then be displayed on the Calendar page. Additionally, a slide-out pop-up will appear, allowing the user to input a note. This note will also be visible on the Calendar page and can be edited at a later time.
+The Journal page features pop-up cards. When a user clicks on one of these cards, they can select mood, blood flow, and drinking water options. The chosen details will then be displayed on the Calendar page. Additionally, a slide-out pop-up will appear, allowing the user to input a note. This note will also be visible on the Calendar page and can be edited at a later time.
 
 <table>
   <tr>
@@ -69,7 +69,7 @@ The Calendar page displays all the items transferred from the other pages. The h
 
 **Settings Page:**
 
-The settings page is still under development, but the app's features are fully functional without it. In upcoming updates, the settings page will offer sign-in details and user information, allowing users to access their data across different devices.
+The Settings page is still under development, but the app's features are fully functional without it. In upcoming updates, the settings page will offer sign-in details and user information, allowing users to access their data across different devices.
 
 <table>
   <tr>
