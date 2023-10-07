@@ -45,7 +45,7 @@ In the profile page, users input their period information, including the start d
 
 **Journal Page:**
 
-The journal page features pop-up cards. When a user clicks on one of these cards, they can select mood, flow, and drinking water options. The chosen details will then be displayed on the Calendar page. Additionally, a slide-out pop-up will appear, allowing the user to input a note. This note will also be visible on the Calendar page and can be edited at a later time.
+The journal page features pop-up cards. When a user clicks on one of these cards, they can select mood, blood flow, and drinking water options. The chosen details will then be displayed on the Calendar page. Additionally, a slide-out pop-up will appear, allowing the user to input a note. This note will also be visible on the Calendar page and can be edited at a later time.
 
 <table>
   <tr>
