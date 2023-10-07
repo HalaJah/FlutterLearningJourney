@@ -52,7 +52,6 @@ The journal page features pop-up cards. When a user clicks on one of these cards
     <td><img src="https://github.com/HalaJah/FlutterLearningJourney/blob/main/period_tracker_app/UI/Journal1.jpg" width=200 height=350></td>
     <td><img src="https://github.com/HalaJah/FlutterLearningJourney/blob/main/period_tracker_app/UI/Journal2.jpg" width=200 height=350></td>
     <td><img src="https://github.com/HalaJah/FlutterLearningJourney/blob/main/period_tracker_app/UI/Journal3.jpg" width=200 height=350></td>
-    <td><img src="https://github.com/HalaJah/FlutterLearningJourney/blob/main/period_tracker_app/UI/Journal4.jpg" width=200 height=350></td>
-    <td><img src="https://github.com/HalaJah/FlutterLearningJourney/blob/main/period_tracker_app/UI/Journal5.jpg" width=200 height=350></td>  
+    <td><img src="https://github.com/HalaJah/FlutterLearningJourney/blob/main/period_tracker_app/UI/Journal4.jpg" width=200 height=350></td>  
   </tr>
 </table>
