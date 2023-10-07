@@ -57,3 +57,24 @@ The journal page features pop-up cards. When a user clicks on one of these cards
   </tr>
 </table>
 
+**Calendar Page:**
+
+The Calendar page displays all the items transferred from the other pages. The highlighted range on the calendar indicates the period duration. In future updates, the calendar will also show the fertile window.
+
+<table>
+  <tr>
+    <td><img src="https://github.com/HalaJah/FlutterLearningJourney/blob/main/period_tracker_app/UI/Calendar.jpg" width=200 height=350></td>
+  </tr>
+</table>
+
+**Settings Page:**
+
+The settings page is still under development, but the app's features are fully functional without it. In upcoming updates, the settings page will offer sign-in details and user information, allowing users to access their data across different devices.
+
+<table>
+  <tr>
+    <td><img src="https://github.com/HalaJah/FlutterLearningJourney/blob/main/period_tracker_app/UI/Settings.jpg" width=200 height=350></td>
+  </tr>
+</table>
+
+
