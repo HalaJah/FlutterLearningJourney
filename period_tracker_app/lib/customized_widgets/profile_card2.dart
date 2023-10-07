@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'dart:core';
+import 'package:period_tracker_app/database/getID.dart';
+import 'package:period_tracker_app/pages/loading.dart';
 
 // ProfileCardTwo Stateful Widget
 class ProfileCardTwo extends StatefulWidget {
+  /* static int cycleDays =
+      getPeriodData() == {} ? 0 : getCycleFromPeriodData() as int; */
+
   static int cycleDays = 0;
   ProfileCardTwo();
 
@@ -107,6 +112,7 @@ class _ProfileCardTwo extends State<ProfileCardTwo> {
                       if (value != "") {
                         ProfileCardTwo.cycleDays = int.parse(value);
                       }
+                      //await savePeriodData(Loading.data);
                     });
                   },
                 ),

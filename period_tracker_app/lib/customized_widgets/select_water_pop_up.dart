@@ -1,4 +1,6 @@
 import 'package:flutter_dialogs/flutter_dialogs.dart';
+import 'package:period_tracker_app/database/getID.dart';
+import 'package:period_tracker_app/pages/loading.dart';
 import 'package:radio_group_v2/radio_group_v2.dart';
 import 'package:period_tracker_app/services/selectWater.dart';
 import 'package:flutter/material.dart';
@@ -71,6 +73,7 @@ class _SelectWaterPopUpState extends State<SelectWaterPopUp> {
                       : SelectWater(0);
 
                   Calendar.displayedWater = selected;
+                  //await savePeriodData(Loading.data);
                   Navigator.pop(context);
                 },
               ),

@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:period_tracker_app/customized_widgets/profile_card1.dart';
 import 'package:period_tracker_app/customized_widgets/profile_card2.dart';
 
-
 class Profile extends StatefulWidget {
-  
+  //static int cycledays = ProfileCardTwo.cycleDays;
+  //static String startDate = ProfileCardOne.startAndEndDates[0];
+  //static String endDate = ProfileCardOne.startAndEndDates[1];
+
   @override
   _ProfileState createState() => _ProfileState();
 }
 
 class _ProfileState extends State<Profile> {
-  
   @override
   Widget build(BuildContext context) {
     // Fetch screen dimensions for layout calculations

@@ -3,8 +3,18 @@ import 'package:table_calendar/table_calendar.dart';
 import 'package:intl/intl.dart';
 import 'package:period_tracker_app/customized_widgets/profile_card1.dart';
 import 'package:period_tracker_app/customized_widgets/profile_card2.dart';
+import 'package:period_tracker_app/database/getID.dart';
 
 class Calendar extends StatefulWidget {
+  /* static String displayedNote =
+      getPeriodData() == {} ? "" : getNoteFromPeriodData() as String;
+  static Object? displayedMood =
+      getPeriodData() == {} ? SizedBox.shrink() : getMoodFromPeriodData();
+  static Object? displayedFlow =
+      getPeriodData() == {} ? SizedBox.shrink() : getFlowFromPeriodData();
+  static Object? displayedWater =
+      getPeriodData() == {} ? SizedBox.shrink() : getWaterFromPeriodData(); */
+
   static String displayedNote = "";
   static Object? displayedMood = SizedBox.shrink();
   static Object? displayedFlow = SizedBox.shrink();

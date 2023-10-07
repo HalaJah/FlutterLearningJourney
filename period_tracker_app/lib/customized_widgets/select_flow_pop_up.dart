@@ -1,4 +1,6 @@
 import 'package:flutter_dialogs/flutter_dialogs.dart';
+import 'package:period_tracker_app/database/getID.dart';
+import 'package:period_tracker_app/pages/loading.dart';
 import 'package:radio_group_v2/radio_group_v2.dart';
 import 'package:period_tracker_app/services/selectFlow.dart';
 import 'package:flutter/material.dart';
@@ -71,6 +73,7 @@ class _SelectFlowPopUpState extends State<SelectFlowPopUp> {
                       : SelectFlow(0);
 
                   Calendar.displayedFlow = selected;
+                  //await savePeriodData(Loading.data);
                   Navigator.pop(context);
                 },
               ),

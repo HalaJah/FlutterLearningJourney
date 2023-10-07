@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:period_tracker_app/database/getID.dart';
 import 'package:period_tracker_app/pages/calendar.dart';
+import 'package:period_tracker_app/pages/loading.dart';
 
 class SlidePopUp extends StatefulWidget {
   SlidePopUp();
@@ -14,6 +16,7 @@ class _SlidePopUp extends State<SlidePopUp> {
 
   void _handleTextChanged() {
     Calendar.displayedNote = _controller.text;
+    //await savePeriodData(Loading.data);
   }
 
   @override

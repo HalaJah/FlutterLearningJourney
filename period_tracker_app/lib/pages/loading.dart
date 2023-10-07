@@ -1,8 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:period_tracker_app/customized_widgets/heart.dart';
+import 'package:period_tracker_app/database/getID.dart';
+import 'package:period_tracker_app/pages/calendar.dart';
+import 'package:period_tracker_app/pages/profile.dart';
 
 // Loading screen widget
 class Loading extends StatefulWidget {
+  /*  static Map<String, dynamic> data = {
+    'startDate': Profile.startDate,
+    'endDate': Profile.endDate,
+    'cycledays': Profile.cycledays,
+    'note': Calendar.displayedNote,
+    'mood': Calendar.displayedMood,
+    'flow': Calendar.displayedFlow,
+    'water': Calendar.displayedWater
+  }; */
+
   @override
   _LoadingState createState() => _LoadingState();
 }
@@ -11,7 +24,9 @@ class _LoadingState extends State<Loading> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 2), () {
+    Future.delayed(const Duration(seconds: 2), () async {
+      //await getDeviceID();
+      //await savePeriodData(Loading.data);
       Navigator.pushReplacementNamed(context, '/home');
     });
   }
