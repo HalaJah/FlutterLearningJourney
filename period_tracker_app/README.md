@@ -32,6 +32,16 @@ The Homepage features two horizontally-scrollable cards that display the fertile
   </tr>
 </table>
 
+**Profile Page:**
+
+In the profile page, users input their period information, including the start date, end date, and cycle days. The dates are entered using an animated plus button that reveals a calendar dialog. Meanwhile, the cycle days are input via a text field located in the second card.
+
+<table>
+  <tr>
+    <td><img src="https://github.com/HalaJah/FlutterLearningJourney/blob/main/period_tracker_app/UI/Profile2.jpg" width=200 height=350></td>
+    <td><img src="https://github.com/HalaJah/FlutterLearningJourney/blob/main/period_tracker_app/UI/Profile1.jpg" width=200 height=350></td>
+  </tr>
+</table>
 
 
 
