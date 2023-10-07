@@ -18,3 +18,21 @@ UI Enhancements: Upcoming updates include adding hover effects and refining the 
 The loading page features animations of a heart and a cat
 
 <img src= "https://github.com/HalaJah/FlutterLearningJourney/blob/main/period_tracker_app/UI/Loading.jpg" width = 200 height = 350 />
+
+**Home Page:**
+
+The Homepage features two horizontally-scrollable cards that display the fertile date and the next period start date. One of these cards includes a button that, when pressed, presents a calendar dialog to select the start and end dates. These dates are then displayed both on the calendar and on the profile page. Additionally, the homepage contains cards that navigate users to other pages. These cards are animated when double tapped. 
+
+<table>
+  <tr>
+    <td><img src="https://github.com/HalaJah/FlutterLearningJourney/blob/main/period_tracker_app/UI/Home1.jpg" width=200 height=350></td>
+    <td><img src="https://github.com/HalaJah/FlutterLearningJourney/blob/main/period_tracker_app/UI/Home2.jpg" width=200 height=350></td>
+    <td><img src="https://github.com/HalaJah/FlutterLearningJourney/blob/main/period_tracker_app/UI/Home3.jpg" width=200 height=350></td>
+    <td><img src="https://github.com/HalaJah/FlutterLearningJourney/blob/main/period_tracker_app/UI/Home4.jpg" width=200 height=350></td>
+  </tr>
+</table>
+
+
+
+
+
