@@ -9,7 +9,7 @@ Mood & Symptoms Logging: Add notes about daily moods, blood flow intensity, and 
 
 
 # Development Status:
-Firebase Integration: Work is currently in progress to integrate Firebase for back-end database management. This will allow for secure storage, retrieval, and management of user data.
+Firebase Integration: Work is currently in progress to integrate Firebase for back-end database management. This will allow for secure storage, retrieval, and management of user data. <br />
 UI Enhancements: Upcoming updates include adding hover effects and refining the frontend experience to make the application more user-friendly.
 
 # App Pages: 
