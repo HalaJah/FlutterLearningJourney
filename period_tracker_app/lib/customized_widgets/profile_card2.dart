@@ -104,14 +104,9 @@ class _ProfileCardTwo extends State<ProfileCardTwo> {
                   controller: _controller,
                   onSubmitted: (value) {
                     setState(() {
-                      try {
+                      if (value != "") {
                         ProfileCardTwo.cycleDays = int.parse(value);
-                      } catch (e) {
-                        if (e is FormatException) {
-                          ProfileCardTwo.cycleDays = 0;
-                        }
                       }
-                      //updateCycleDays();
                     });
                   },
                 ),

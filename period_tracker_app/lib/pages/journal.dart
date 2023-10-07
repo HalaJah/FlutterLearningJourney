@@ -161,6 +161,7 @@ class _JournalState extends State<Journal> {
                                       onTap: () {
                                         switch (listView[index].title) {
                                           case 'Note':
+                                            //FIXME
                                             slideDialog.showSlideDialog(
                                               barrierDismissible: false,
                                               pillColor: Colors.pink[100],
