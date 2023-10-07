@@ -24,7 +24,7 @@ class _LoadingState extends State<Loading> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 2), () async {
+    Future.delayed(const Duration(seconds: 5), () async {
       //await getDeviceID();
       //await savePeriodData(Loading.data);
       Navigator.pushReplacementNamed(context, '/home');
