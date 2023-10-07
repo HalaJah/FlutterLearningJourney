@@ -13,6 +13,7 @@ UI Enhancements: Upcoming updates include adding hover effects and refining the 
 
 # App Pages: 
 **Loading Page:**
+
 The loading page features animations of a heart and a cat
 
 <img src= "https://github.com/HalaJah/FlutterLearningJourney/blob/main/period_tracker_app/UI/Loading.jpg" width = 200 height = 350 />
