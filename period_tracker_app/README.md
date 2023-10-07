@@ -1,16 +1,18 @@
-# period_tracker_app
+# Period Tracker Mobile Application
+This repository contains the source code for a Period Tracker mobile application developed using Flutter. The application is designed to assist users in tracking their menstrual cycles, offering predictions for fertile windows for conceiving, and providing a comprehensive view of period history. Users can also add notes to track their moods, blood flow, and other related insights.
 
-A new Flutter project.
+# Key Features:
+**Menstrual Cycle Tracking:** Easily log the start and end dates of periods (completed).
+**Fertility Predictions:** Get insights on potential fertile windows for conceiving (uder development).
+**Period History:** Review past menstrual cycles to understand patterns (uder development).
+**Mood & Symptoms Logging:** Add notes about daily moods, blood flow intensity, and any other symptoms or observations (completed).
 
-## Getting Started
+# Development Status:
+Firebase Integration: Work is currently in progress to integrate Firebase for back-end database management. This will allow for secure storage, retrieval, and management of user data.
+UI Enhancements: Upcoming updates include adding hover effects and refining the frontend experience to make the application more user-friendly.
 
-This project is a starting point for a Flutter application.
+# App Pages: 
+**Loading Page:**
+The loading page features animations of a heart and a cat
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![](http://UI/Loading.jpg)
