@@ -43,6 +43,16 @@ In the profile page, users input their period information, including the start d
   </tr>
 </table>
 
+**Journal Page:**
 
+The journal page features pop-up cards. When a user clicks on one of these cards, they can select mood, flow, and drinking water options. The chosen details will then be displayed on the Calendar page. Additionally, a slide-out pop-up will appear, allowing the user to input a note. This note will also be visible on the Calendar page and can be edited at a later time.
 
-
+<table>
+  <tr>
+    <td><img src="https://github.com/HalaJah/FlutterLearningJourney/blob/main/period_tracker_app/UI/Journal1.jpg" width=200 height=350></td>
+    <td><img src="https://github.com/HalaJah/FlutterLearningJourney/blob/main/period_tracker_app/UI/Journal2.jpg" width=200 height=350></td>
+    <td><img src="https://github.com/HalaJah/FlutterLearningJourney/blob/main/period_tracker_app/UI/Journal3.jpg" width=200 height=350></td>
+    <td><img src="https://github.com/HalaJah/FlutterLearningJourney/blob/main/period_tracker_app/UI/Journal4.jpg" width=200 height=350></td>
+    <td><img src="https://github.com/HalaJah/FlutterLearningJourney/blob/main/period_tracker_app/UI/Journal5.jpg" width=200 height=350></td>  
+  </tr>
+</table>
